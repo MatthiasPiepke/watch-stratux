@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_recycler_item_2_linear_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/menu_font"
+        android:paddingTop="5dp"
+        android:text="Stratux"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/menu_font"
+        android:text="System Information"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end"
+            android:orientation="vertical"
+            android:paddingEnd="3dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="SW Version"
+                android:textColor="@color/white"
+                android:textSize="@dimen/TextSize" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="CPU Temp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/TextSize" />
+<!--
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="SDR Devices"
+                android:textColor="@color/white"
+                android:textSize="@dimen/TextSize" />
+-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="GPS Solution"
+                android:textColor="@color/white"
+                android:textSize="@dimen/TextSize" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="GPS Satellites"
+                android:textColor="@color/white"
+                android:textSize="@dimen/TextSize" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="OGN Messages"
+                android:textColor="@color/white"
+                android:textSize="@dimen/TextSize" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="OGN Noise/Gain"
+                android:textColor="@color/white"
+                android:textSize="@dimen/TextSize" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="1090 Messages"
+                android:textColor="@color/white"
+                android:textSize="@dimen/TextSize" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="1090 Traffic"
+                android:textColor="@color/white"
+                android:textSize="@dimen/TextSize" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="Uptime"
+                android:textColor="@color/white"
+                android:textSize="@dimen/TextSize" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
+            android:background="?android:attr/listDivider"
+            android:backgroundTint="#9A9A9A"
+            android:backgroundTintMode="add" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="start|center_vertical"
+            android:orientation="vertical"
+            android:paddingStart="3dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="*"
+                android:textSize="@dimen/TextSize"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="*"
+                android:textSize="@dimen/TextSize"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="*"
+                android:textSize="@dimen/TextSize"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/text4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="*"
+                android:textSize="@dimen/TextSize"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/text5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="*"
+                android:textSize="@dimen/TextSize"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/text6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="*"
+                android:textSize="@dimen/TextSize"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/text7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="*"
+                android:textSize="@dimen/TextSize"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/text8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="*"
+                android:textSize="@dimen/TextSize"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/text9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="*"
+                android:textSize="@dimen/TextSize"
+                android:textColor="@color/white"/>
+<!--
+            <TextView
+                android:id="@+id/text10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/menu_font"
+                android:text="*"
+                android:textSize="@dimen/TextSize"
+                android:textColor="@color/white"/>
+-->
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

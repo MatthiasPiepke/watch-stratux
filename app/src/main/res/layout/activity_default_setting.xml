@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    tools:deviceIds="wear"
+    android:id="@+id/defaultSettings">
+
+    <TextView
+        android:id="@+id/defaultSettingsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:gravity="bottom|center"
+        android:fontFamily="@font/menu_font"
+        android:textColor="#FFFFFF"
+        android:text="Do you want to\nrestore the default\nsettings?"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/defaultSettingsOkButton"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/round_button"
+            android:foreground="@drawable/okay_black" />
+
+        <Button
+            android:id="@+id/defaultSettingsCancelButton"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/round_button"
+            android:foreground="@drawable/cancel_black" />
+
+    </LinearLayout>
+
+</LinearLayout>

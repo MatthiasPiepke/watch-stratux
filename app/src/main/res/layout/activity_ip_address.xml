@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    tools:deviceIds="wear"
+    android:id="@+id/ipSettings">
+
+    <TextView
+        android:id="@+id/IpSettingsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:fontFamily="@font/menu_font"
+        android:textColor="#FFFFFF"
+        android:text="IP Address"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/IpAddressTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:fontFamily="@font/menu_number_font"
+        android:textColor="#FFFFFF"
+        android:text="xxx"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/ipSettingLeftButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/round_button"
+            android:foreground="@drawable/arrow_left_white" />
+
+        <Button
+            android:id="@+id/ipSettingButton7"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/round_button"
+            android:fontFamily="@font/menu_number_font"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/ipSettingButton8"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/round_button"
+            android:fontFamily="@font/menu_number_font"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/ipSettingButton9"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/round_button"
+            android:fontFamily="@font/menu_number_font"
+            android:text="9" />
+
+        <Button
+            android:id="@+id/ipSettingRightButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/round_button"
+            android:foreground="@drawable/arrow_right_white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/ipSettingCancelButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/round_button"
+            android:foreground="@drawable/cancel_white" />
+
+        <Button
+            android:id="@+id/ipSettingButton4"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/round_button"
+            android:fontFamily="@font/menu_number_font"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/ipSettingButton5"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/round_button"
+            android:fontFamily="@font/menu_number_font"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/ipSettingButton6"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/round_button"
+            android:fontFamily="@font/menu_number_font"
+            android:text="6" />
+
+        <Button
+            android:id="@+id/ipSettingOkayButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/round_button"
+            android:foreground="@drawable/okay_white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/ipSettingButton1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/round_button"
+            android:fontFamily="@font/menu_number_font"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/ipSettingButton2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/round_button"
+            android:fontFamily="@font/menu_number_font"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/ipSettingButton3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/round_button"
+            android:fontFamily="@font/menu_number_font"
+            android:text="3" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/ipSettingButton0"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="1dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/round_button"
+            android:fontFamily="@font/menu_number_font"
+            android:text="0" />
+
+    </LinearLayout>
+
+</LinearLayout>

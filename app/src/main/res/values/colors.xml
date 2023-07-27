@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="gray_button_not_selected">#8f8f8f</color>
+    <color name="gray_button_selected">#ffffff</color>
+    <color name="radar_numbers">#dfdfdf</color>
+    <color name="radar_circles">#8f8f8f</color>
+    <color name="card_view_background">#3A3A3A</color>
+</resources>

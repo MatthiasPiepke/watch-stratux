@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_recycler_item_3_linear_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingTop="5dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="5dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/main_recycler_item_3_card_view_1"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/card_view_background"
+            app:cardCornerRadius="25dp"
+            app:contentPadding="3dp"
+            app:contentPaddingLeft="20dp"
+            app:contentPaddingRight="20dp">
+
+            <TextView
+                android:id="@+id/main_recycler_item_3_text_view_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/menu_font"
+                android:gravity="center"
+                android:text="Settings"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="1dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/main_recycler_item_3_card_view_2"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/card_view_background"
+            app:cardCornerRadius="25dp"
+            app:contentPadding="3dp"
+            app:contentPaddingLeft="20dp"
+            app:contentPaddingRight="20dp">
+
+            <TextView
+                android:id="@+id/main_recycler_item_3_text_view_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/menu_font"
+                android:gravity="center"
+                android:text="Exit"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</LinearLayout>

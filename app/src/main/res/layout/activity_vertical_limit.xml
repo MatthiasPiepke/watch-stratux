@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    tools:deviceIds="wear"
+    android:id="@+id/verticalLimitSettings">
+
+    <TextView
+        android:id="@+id/verticalLimitSettingsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:fontFamily="@font/menu_font"
+        android:textColor="#FFFFFF"
+        android:text="Traffic Visibility"
+        android:textSize="16sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.75"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <NumberPicker
+            android:id="@+id/verticalLimitSettingsPicker1"
+            android:theme="@font/menu_font"
+            android:layout_width="wrap_content"
+            android:layout_height="95dp"
+            android:layout_marginRight="10dp" />
+
+        <NumberPicker
+            android:id="@+id/verticalLimitSettingsPicker2"
+            android:theme="@font/menu_font"
+            android:layout_width="wrap_content"
+            android:layout_height="95dp"
+            android:layout_marginLeft="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/verticalLimitSettingsButton"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:background="@drawable/round_button"
+            android:foreground="@drawable/okay_white"/>
+    </LinearLayout>
+</LinearLayout>
