@@ -16,7 +16,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("int", "IP_3", "178")
+            buildConfigField("int", "IP_4", "39")
+        }
         release {
+            buildConfigField("int", "IP_3", "0")
+            buildConfigField("int", "IP_4", "1")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
