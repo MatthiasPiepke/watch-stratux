@@ -84,7 +84,7 @@ class MainRecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<Recyc
             runnableRadarView = object : Runnable {
                 override fun run() {
                     if (updateRadarView) {
-                        Log.i(TAG, "update RadarView")
+                        if(BuildConfig.DEBUG) Log.i(TAG, "update RadarView")
                         radarPaintView.invalidate()
                     }
                     handlerRadarView.postDelayed(this, 1000)
@@ -112,7 +112,7 @@ class MainRecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<Recyc
                 override fun run() {
                     if(updateSystemInfo) {
                         if (StratuxStatusData.newData) {
-                            Log.i(TAG, "update SystemInfo")
+                            if(BuildConfig.DEBUG) Log.i(TAG, "update SystemInfo")
                             textView1.setText(StratuxStatusData.version.value)
                             textView2.setText(String.format("%.1f °C", StratuxStatusData.cpuTemp.value))
 

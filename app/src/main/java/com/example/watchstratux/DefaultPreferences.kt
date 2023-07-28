@@ -9,8 +9,8 @@ object DefaultPreferences {
     var ip_1: AppPreference = AppPreference("IP_1_KEY", 192)
     var ip_2: AppPreference = AppPreference("IP_2_KEY", 168)
     var ip_3: AppPreference = AppPreference("IP_3_KEY", 178)
-    var ip_4: AppPreference = AppPreference("IP_4_KEY", 53)
-    var ip_port: AppPreference = AppPreference("IP_PORT_KEY", 10000)
+    var ip_4: AppPreference = AppPreference("IP_4_KEY", 39)
+    var ip_port: AppPreference = AppPreference("IP_PORT_KEY", 2000)
 
     var lower_vertical_limit: AppPreference = AppPreference("LOWER_VERT_LIMIT_KEY", 0)
     var upper_vertical_limit: AppPreference = AppPreference("UPPER_VERT_LIMIT_KEY", 0)

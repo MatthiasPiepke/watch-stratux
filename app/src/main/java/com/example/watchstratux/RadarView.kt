@@ -61,29 +61,26 @@ fun createAircraftIcon(distance: Int, relBearing: Float, relTrack: Int, groundSp
     var tx_new = x - (cos_a * tx + sin_a * ty).toInt()
     var ty_new = y - (cos_a * ty - sin_a * tx).toInt()
 
-
-    //Log.i("RADARVIEW", "RelTrack "+relTrack)
-
     var textLeftAligned: Boolean = false
+    // 0 - 90
     if( relTrack < 0 ) {
         if (relTrack >= -90) {
             textLeftAligned = true
-    //        Log.i("RADARVIEW", "0 - 90")
         }
+        // 90 - 180
         else if (relTrack < -90) {
             textLeftAligned = true
             ty_new -= 18
-    //        Log.i("RADARVIEW", "90 - 180")
         }
     } else {
+        // 180 - 270
         if (relTrack <= 90) {
             textLeftAligned = true
             ty_new -= 18
-     //       Log.i("RADARVIEW", "180 - 270")
         }
+        // 270 - 360
         else if (relTrack > 90) {
             textLeftAligned = true
-     //       Log.i("RADARVIEW", "270 - 360")
         }
     }
 

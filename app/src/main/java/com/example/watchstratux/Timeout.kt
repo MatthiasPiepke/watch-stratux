@@ -19,9 +19,9 @@ class Timeout(private val timeoutTime: Int, private val id: String) {
 
     private val timeoutRunnable = object : Runnable {
         override fun run() {
-            //Log.i(TAG, "check " + id)
+            //if(BuildConfig.DEBUG) Log.i(TAG, "check " + id)
             if (reset == true) {
-                Log.e(TAG, id + " Timeout Event")
+                if(BuildConfig.DEBUG) Log.e(TAG, id + " Timeout Event")
                 isTimeout = true
                 listener.OnTimeoutEvent()
             } else {
@@ -33,7 +33,7 @@ class Timeout(private val timeoutTime: Int, private val id: String) {
 
     fun reset() {
         reset = false
-        //Log.i(TAG, "reset " + id)
+        //if(BuildConfig.DEBUG) Log.i(TAG, "reset " + id)
     }
 
     fun start() {
@@ -41,13 +41,13 @@ class Timeout(private val timeoutTime: Int, private val id: String) {
         reset = true
         stopTimeout = false
         timeoutHandler.postDelayed(timeoutRunnable, timeoutTime.toLong())
-        //Log.i(TAG, id + " started")
+        //if(BuildConfig.DEBUG) Log.i(TAG, id + " started")
     }
 
     fun stop() {
         stopTimeout = true
         timeoutHandler.removeCallbacks(timeoutRunnable)
-        //Log.i(TAG, id + " stopped")
+        //if(BuildConfig.DEBUG) Log.i(TAG, id + " stopped")
     }
 
     interface TimeoutEventListener {
@@ -56,7 +56,7 @@ class Timeout(private val timeoutTime: Int, private val id: String) {
 
     internal inner class DefaultTimeoutEventListener : TimeoutEventListener {
         override fun OnTimeoutEvent() {
-            Log.e(TAG, id + " default Timeout Event")
+            if(BuildConfig.DEBUG) Log.e(TAG, id + " default Timeout Event")
             stop()
         }
     }

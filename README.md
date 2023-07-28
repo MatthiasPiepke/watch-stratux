@@ -1,5 +1,5 @@
 # WatchStratux
-WatchStratux is an Android App for Smartwatches and displays traffic information from your DIY Stratux receiver (tested on Europe Edition only).
+WatchStratux is an Android App for Smartwatches and displays traffic information from your DIY Stratux receiver (tested on Europe Edition only). It works of course alongside all other EFIS and display devices.
 
 <img src="screenshots/screenshot_2.png" alt="drawing" width="200"/> <img src="screenshots/screenshot_1.png" alt="drawing" width="200"/> <img src="screenshots/screenshot_4.png" alt="drawing" width="200"/> <img src="screenshots/screenshot_3.png" alt="drawing" width="200"/>
 
@@ -28,19 +28,26 @@ It needs to be installed by using ADB commandline tool from Android.
 	2. tap the Build Number option (*Softwareversion*) seven times until you see the message: You are now a developer! This enables developer options on your device.
 	3. navigate under system settings to developer options (*Entwickleroptionen*) and enable ADB debugging and debugging via wlan
 
-2. **Download SDK Platform-Tools from here:**<br/>
+2. **Download latest WatchStratux APK file**<br/>
+https://github.com/MatthiasPiepke/watch-stratux/releases
+
+3. **Download SDK Platform-Tools from here:**<br/>
 https://developer.android.com/tools/releases/platform-tools
 
-3. **Connect ADB to your watch via WiFi:**<br/>
-Command: `adb connect 192.168.10.xx`
+4. **Connect ADB to your watch via WiFi:**<br/>
+Open command prompt and navigate to the platform-tools folder<br/>
+Command: *`adb connect 192.168.xx.xx:5555`*
 
-4. **Install apk file on your watch:**<br/>
-Command: `adb install WatchStratux.apk`
+5. **Install apk file on your watch:**<br/>
+Command: *`adb install /your-path/WatchStratux_vx-x-x.apk`*
 
-Now StratuxWatch is installed!
+**Now StratuxWatch is installed!**<br/>
+
+6. **Disconnect from ADB**<br/>
+Command: *`adb disconnect 192.168.xx.xx:5555`*
 
 ## Best Practice
- * before run the app: enable WiFi on your watch and connect to your stratux access point or to the WiFi network, where your stratux is connected to
+ * before run the app: enable WiFi on your watch and connect to your stratux access point or to the WiFi network, where your stratux is connected to. Your watch may not automatically connect to the stratux WiFi.
  * the default IP configuration of stratux access point is 192.168.0.1:2000
  
 ## Disclaimer

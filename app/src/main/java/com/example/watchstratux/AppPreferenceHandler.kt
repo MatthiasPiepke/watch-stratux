@@ -17,10 +17,10 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
         appPreferences = context.getSharedPreferences(preferenceFile, Context.MODE_PRIVATE)
         if (appPreferences.getInt("Init_KEY", 0) == 1) {
             isAppPreferenceFileNew = false
-            Log.i("AppPreferenceHandler:", "Init_KEY found ...")
+            if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Init_KEY found ...")
         } else {
             isAppPreferenceFileNew = true
-            Log.i("AppPreferenceHandler:", "Init_KEY not found ...")
+            if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Init_KEY not found ...")
             if (savePreference(AppPreference("Init_KEY", 1))) {
                 Log.i("AppPreferenceHandler:", "Init_KEY created ...")
             }
@@ -33,7 +33,7 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
                 for (pref in DefaultPreferences.defaultPreferences) {
                     savePreference(pref)
                 }
-                Log.i("AppPreferenceHandler:", "Default Preferences stored")
+                if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Default Preferences stored")
             }
         }
     }
@@ -43,8 +43,8 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
         if (cleared == true)
         {
             savePreference(AppPreference("Init_KEY", 1))
-            Log.i("AppPreferenceHandler:", "Clear OKAY")
-        } else Log.i("AppPreferenceHandler:", "Clear FAILED")
+            if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Clear OKAY")
+        } else if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Clear FAILED")
         return cleared
     }
 
@@ -56,9 +56,9 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
 
         if (value != -1) {
             pref.value = value
-            Log.i("AppPreferenceHandler:", pref.key + " load " + pref.value)
+            if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " load " + pref.value)
         } else {
-            Log.i("AppPreferenceHandler:", pref.key + "load operation FAILED")
+            if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + "load operation FAILED")
             loadIssue = true
         }
 
@@ -68,9 +68,9 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
     fun savePreference(pref: AppPreference): Boolean {
         var saveIssue = false
         if (appPreferences.edit().putInt(pref.key, pref.value).commit() == true) {
-            Log.i("AppPreferenceHandler:", pref.key + " saved " + pref.value)
+            if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " saved " + pref.value)
         } else {
-            Log.i("AppPreferenceHandler:", pref.key + "save operation FAILED")
+            if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + "save operation FAILED")
             saveIssue = true
         }
         return !saveIssue
@@ -79,9 +79,9 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
     fun clearPreference(pref: AppPreference): Boolean {
         var clearIssue = false
         if (appPreferences.edit().remove(pref.key).commit() == true) {
-            Log.i("AppPreferenceHandler:", pref.key + " cleared " + pref.value)
+            if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " cleared " + pref.value)
         } else {
-            Log.i("AppPreferenceHandler:", pref.key + "clear operation FAILED")
+            if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + "clear operation FAILED")
             clearIssue = true
         }
         return !clearIssue

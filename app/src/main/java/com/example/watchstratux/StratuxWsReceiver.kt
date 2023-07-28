@@ -47,7 +47,7 @@ class StratuxWsReceiver() {
     inner class mWebSocketClient(uri: URI) : WebSocketClient(uri) {
 
         override fun onOpen(handshakedata: ServerHandshake?) {
-            Log.i(TAG, "opened")
+            if(BuildConfig.DEBUG) Log.i(TAG, "opened")
         }
 
         override fun onMessage(message: String?) {
@@ -70,16 +70,16 @@ class StratuxWsReceiver() {
             StratuxStatusData.ognMessagesMax.value = jsonconversion.getInt(StratuxStatusData.ognMessagesMax.key)
             StratuxStatusData.sdrDevices.value = jsonconversion.getInt(StratuxStatusData.sdrDevices.key)
             StratuxStatusData.upTimeClock.value = jsonconversion.getString(StratuxStatusData.upTimeClock.key)
-            Log.i(TAG, "Message")
+            if(BuildConfig.DEBUG) Log.i(TAG, "Message")
             StratuxStatusData.newData = true
         }
 
         override fun onClose(code: Int, reason: String?, remote: Boolean) {
-            Log.i(TAG, "closed")
+            if(BuildConfig.DEBUG) Log.i(TAG, "closed")
         }
 
         override fun onError(ex: java.lang.Exception?) {
-            Log.e(TAG, "Error "+ex)
+            if(BuildConfig.DEBUG) Log.e(TAG, "Error "+ex)
             webSocketClient.close()
         }
     }

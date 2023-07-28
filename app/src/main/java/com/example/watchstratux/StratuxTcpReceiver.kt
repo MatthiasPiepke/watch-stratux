@@ -78,7 +78,7 @@ class StratuxTcpReceiver {
 
     internal inner class ReadlineTimeoutEvent : Timeout.TimeoutEventListener {
         override fun OnTimeoutEvent() {
-            Log.e(TAG, "Timeout Event during readline")
+            if(BuildConfig.DEBUG) Log.e(TAG, "Timeout Event during readline")
             readlineTimeout.stop()
             stop()
         }
@@ -91,7 +91,7 @@ class StratuxTcpReceiver {
             try {
                 socket.connect(InetSocketAddress(""+AppData.ip_1.value+"."+AppData.ip_2.value+"."+AppData.ip_3.value+"."+AppData.ip_4.value, Integer.parseInt(""+AppData.ip_port.value)), 100)
             } catch (e: Exception) {
-                Log.e(TAG, "Error 2: Could not open the socket! $e")
+                if(BuildConfig.DEBUG) Log.e(TAG, "Error 2: Could not open the socket! $e")
             }
 
             if (socket.isConnected) {
@@ -107,7 +107,7 @@ class StratuxTcpReceiver {
                         try {
                             readline = socketReadStream.readLine()
                         } catch (e: Exception) {
-                            Log.e(TAG, "Error 5: $e")
+                            if(BuildConfig.DEBUG) Log.e(TAG, "Error 5: $e")
                         }
                         if (readline != null) {
                             readlineTimeout.reset()
@@ -118,7 +118,7 @@ class StratuxTcpReceiver {
                             }*/
                         }
                     } else {
-                        Log.e(TAG, "ERROR 3: Lost Connection")
+                        if(BuildConfig.DEBUG) Log.e(TAG, "ERROR 3: Lost Connection")
                         isReceiverLooping = false
                     }
                 }
@@ -127,7 +127,7 @@ class StratuxTcpReceiver {
                 try {
                     socket.close()
                 } catch (e: Exception) {
-                    Log.e(TAG, "Error 4: Could not close the socket! $e")
+                    if(BuildConfig.DEBUG) Log.e(TAG, "Error 4: Could not close the socket! $e")
                 }
                 AppData.connectionStatus = AppData.ConnectionStatus.NO_STRATUX
             }

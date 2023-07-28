@@ -30,7 +30,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 
     private val TAG = "WatchStratux MainActivity"
 
-    override fun getAmbientCallback(): AmbientModeSupport.AmbientCallback? {
+    override fun getAmbientCallback(): AmbientModeSupport.AmbientCallback {
         return MyAmbientCallback()
     }
     private class MyAmbientCallback : AmbientModeSupport.AmbientCallback() {
@@ -114,6 +114,8 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
     override fun onStart() {
         super.onStart()
         Log.i(TAG,"Started")
+        if(BuildConfig.DEBUG) Log.i(TAG, "in debug mode")
+        else Log.i(TAG, "in release mode")
     }
 
     override fun onResume() {

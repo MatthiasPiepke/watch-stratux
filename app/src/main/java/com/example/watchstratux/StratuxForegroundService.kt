@@ -33,7 +33,7 @@ class StratuxForegroundService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        Log.i(TAG, "Service created!")
+        if(BuildConfig.DEBUG) Log.i(TAG, "Service created!")
 
         val channelID = createNotificationChannel(this)
         val channelBuilder = NotificationCompat.Builder(this, channelID)
@@ -57,17 +57,17 @@ class StratuxForegroundService : Service() {
             while (TCPisRunning) {
                 if( wifiManager.isWifiEnabled() == true ){
                     AppData.connectionStatus = AppData.ConnectionStatus.NO_STRATUX
-                    Log.i(TAG, "TCP Service - Wifi enabled")
-                    Log.i(TAG, "Stratux TCP Receiver starting...")
+                    if(BuildConfig.DEBUG) Log.i(TAG, "TCP Service - Wifi enabled")
+                    if(BuildConfig.DEBUG) Log.i(TAG, "Stratux TCP Receiver starting...")
                     AppData.stratuxTcpReceiver.start()
-                    Log.i(TAG, "Stratux TCP Receiver stopped!")
+                    if(BuildConfig.DEBUG) Log.i(TAG, "Stratux TCP Receiver stopped!")
                 } else {
                     AppData.connectionStatus = AppData.ConnectionStatus.NO_WIFI
-                    Log.i(TAG, "TCP Service - Wifi disabled")
+                    if(BuildConfig.DEBUG) Log.i(TAG, "TCP Service - Wifi disabled")
                 }
                 Thread.sleep(3000)
             }
-            Log.i(TAG, "TCP Service is stopping")
+            if(BuildConfig.DEBUG) Log.i(TAG, "TCP Service is stopping")
             stopSelf()
         }
 
@@ -78,20 +78,20 @@ class StratuxForegroundService : Service() {
             while (WSisRunning) {
                 if(AppData.stratuxWsReceiver.isStratuxWsReceiverConnected() == false){
                     if( wifiManager.isWifiEnabled() == true ){
-                        Log.i(TAG, "WS Service - Wifi enabled")
-                        Log.i(TAG, "Stratux WS Receiver is starting")
+                        if(BuildConfig.DEBUG) Log.i(TAG, "WS Service - Wifi enabled")
+                        if(BuildConfig.DEBUG) Log.i(TAG, "Stratux WS Receiver is starting")
                         AppData.stratuxWsReceiver.start()
                         if(AppData.stratuxWsReceiver.isStratuxWsReceiverConnected())
-                            Log.i(TAG, "Stratux WS Receiver started successfully")
+                            if(BuildConfig.DEBUG) Log.i(TAG, "Stratux WS Receiver started successfully")
                         else
-                            Log.e(TAG, "Stratux WS Receiver Start failed")
+                                if(BuildConfig.DEBUG) Log.e(TAG, "Stratux WS Receiver Start failed")
                     } else {
-                        Log.i(TAG, "WS Service - Wifi disabled")
+                        if(BuildConfig.DEBUG) Log.i(TAG, "WS Service - Wifi disabled")
                     }
                 }
                 Thread.sleep(3000)
             }
-            Log.i(TAG, "WS Service is stopping")
+            if(BuildConfig.DEBUG) Log.i(TAG, "WS Service is stopping")
             stopSelf()
         }
     }
@@ -102,7 +102,7 @@ class StratuxForegroundService : Service() {
         WSisRunning = false
         AppData.stratuxTcpReceiver.stop()
         AppData.stratuxWsReceiver.stop()
-        Log.i(TAG, "Service destroyed!")
+        if(BuildConfig.DEBUG) Log.i(TAG, "Service destroyed!")
     }
 
     private fun createNotificationChannel(context: Context):String{
