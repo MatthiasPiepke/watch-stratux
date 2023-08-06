@@ -54,15 +54,7 @@
                 android:text="CPU Temp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/TextSize" />
-<!--
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/menu_font"
-                android:text="SDR Devices"
-                android:textColor="@color/white"
-                android:textSize="@dimen/TextSize" />
--->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -220,16 +212,7 @@
                 android:text="*"
                 android:textSize="@dimen/TextSize"
                 android:textColor="@color/white"/>
-<!--
-            <TextView
-                android:id="@+id/text10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/menu_font"
-                android:text="*"
-                android:textSize="@dimen/TextSize"
-                android:textColor="@color/white"/>
--->
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
