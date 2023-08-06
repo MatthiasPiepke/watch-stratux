@@ -44,11 +44,13 @@ class MainRecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<Recyc
         val wearRecyclerViewHolder1 = WearRecyclerViewHolder1(item_view_1)
         val wearRecyclerViewHolder2 = WearRecyclerViewHolder2(item_view_2)
         val wearRecyclerViewHolder3 = WearRecyclerViewHolder3(item_view_3)
+        val wearRecyclerViewHolder4 = WearRecyclerViewHolder4(item_view_4)
 
         when (viewType) {
             0 -> return wearRecyclerViewHolder1
             1 -> return wearRecyclerViewHolder2
             2 -> return wearRecyclerViewHolder3
+            3 -> return wearRecyclerViewHolder4
         }
         return WearRecyclerViewHolder1(item_view_1)
     }
@@ -169,9 +171,14 @@ class MainRecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<Recyc
         }
     }
 
+    inner class WearRecyclerViewHolder4(view: View) : ViewHolder(view) {
+        init {
+
+        }
+    }
 
     override fun getItemCount(): Int {
-        return 3
+        return 4
     }
 
     override fun getItemViewType(position: Int): Int {
