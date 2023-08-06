@@ -39,6 +39,7 @@ class MainRecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<Recyc
         val item_view_1: View = LayoutInflater.from(parent.context).inflate(R.layout.main_recycler_item_view_1, parent, false)
         val item_view_2: View = LayoutInflater.from(parent.context).inflate(R.layout.main_recycler_item_view_2, parent, false)
         val item_view_3: View = LayoutInflater.from(parent.context).inflate(R.layout.main_recycler_item_view_3, parent, false)
+        val item_view_4: View = LayoutInflater.from(parent.context).inflate(R.layout.main_recycler_item_view_4, parent, false)
 
         val wearRecyclerViewHolder1 = WearRecyclerViewHolder1(item_view_1)
         val wearRecyclerViewHolder2 = WearRecyclerViewHolder2(item_view_2)
