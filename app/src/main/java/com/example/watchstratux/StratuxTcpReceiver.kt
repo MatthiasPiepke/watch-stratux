@@ -302,21 +302,13 @@ class StratuxTcpReceiver {
             //StratuxData.GPRMC.longitudeDirection = splitMsg[6]
             StratuxData.GPRMC.groundSpeedKn = splitMsg[7].toFloat()
             StratuxData.GPRMC.track = splitMsg[8].toFloat()
-
-            // check if GPS fix has 3D
-            if( AppData.gpsFix == true ){
-                AppData.myAircraft.groundSpeedMeSec = StratuxData.GPRMC.groundSpeedKn*0.514444f
-                AppData.myAircraft.track = StratuxData.GPRMC.track.toInt()
-            }
+            AppData.myAircraft.groundSpeedMeSec = StratuxData.GPRMC.groundSpeedKn*0.514444f
+            AppData.myAircraft.track = StratuxData.GPRMC.track.toInt()
         }
 
         if( splitMsg[0].equals("${'$'}GPGGA") == true ) {
             StratuxData.GPGGA.altitudeMe = splitMsg[9].toFloat()
-
-            // check if GPS fix has 3D
-            if( AppData.gpsFix == true ) {
-                AppData.myAircraft.altitudeFt = StratuxData.GPGGA.altitudeMe * 3.281f
-            }
+            AppData.myAircraft.altitudeFt = StratuxData.GPGGA.altitudeMe * 3.281f
         }
 
         if( splitMsg[0].equals("${'$'}GPGSA") == true ) {

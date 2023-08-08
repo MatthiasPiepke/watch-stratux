@@ -160,8 +160,8 @@ class RadarPaintView(context: Context) : View(context) {
             radarPaint
         )
 
-        // draw all other things below here only if stratux is connected
-        if (AppData.connectionStatus === AppData.ConnectionStatus.STRATUX) {
+        // draw all other things below here only if stratux is connected and stratux gps is 3d fix
+        if ( (AppData.connectionStatus == AppData.ConnectionStatus.STRATUX) && (AppData.gpsFix == true) ) {
             // draw compass
             canvas.save()
             canvas.rotate(
@@ -301,6 +301,7 @@ class RadarPaintView(context: Context) : View(context) {
                 radarPaint.flags = Paint.ANTI_ALIAS_FLAG
             }
         } else {
+            // here something went wrong with stratux connection or data
             // draw aircraft red icon
             val bMap = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.plane_icon_80_red), 40, 40, false)
             canvas.drawBitmap(
@@ -310,16 +311,22 @@ class RadarPaintView(context: Context) : View(context) {
                 radarPaint
             )
 
-            // draw text no connection
+            // draw error message
             radarPaint.typeface = resources.getFont(R.font.menu_font)
             radarPaint.textSize = 30f
             radarPaint.color = Color.RED
             radarPaint.style = Paint.Style.FILL
+            // error message, when wifi okay, but no stratux server available
             var noConnectText1 = "NO STRATUX on"
             var noConnectText2 = ""+AppData.ip_1.value+"."+AppData.ip_2.value+"."+AppData.ip_3.value+"."+AppData.ip_4.value+":"+Integer.parseInt(""+AppData.ip_port.value)
+            // error message, when wifi is not connected
             if (AppData.connectionStatus == AppData.ConnectionStatus.NO_WIFI) {
                 noConnectText1 = "WIFI"
                 noConnectText2 = "NOT CONNECTED"
+            } else {
+                // error message, when stratux has no valid 3d gps data
+                noConnectText1 = "STRATUX"
+                noConnectText2 = "HAS NO GPS"
             }
             canvas.drawText(
                 noConnectText1,
