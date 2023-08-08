@@ -69,10 +69,11 @@ object StratuxData {
 class StratuxTcpReceiver {
     var isReceiverRunning = false
     var isReceiverLooping = false
-    var alarmCounter = 0
+    var alarmIsSet = false
 
     private val readlineTimeout: Timeout = Timeout(3000, "TCP Receiver -readline-")
     private val stopTimeout: Timeout = Timeout(3000, "TCP Receiver -stop-")
+    private val wakeupTimeout: Timeout = Timeout(500, "TCP Receiver -wakeup for alarm-")
 
     private val TAG = "StratuxTcpReceiver"
 
@@ -176,22 +177,25 @@ class StratuxTcpReceiver {
                 nextAircraft.ageSec++
             }
 
-            // check for alarms
-            if( AppData.vibration_alarm.value == 1 ) {
-                if( StratuxData.PFLAU.alarmLevel != 0 ) {
-                    if(alarmCounter == 0 ){
-                        var wakeLock = AppData.powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP or PowerManager.ON_AFTER_RELEASE, "appname::WakeLock")
-                        wakeLock.acquire()
-                        while( AppData.isAppAcitve == false )  // wait until main activity wake call onResume, vib is not working before
-                        AppData.vibrator.vibrate(VibrationEffect.createOneShot(500, 255))
-                        wakeLock.release()
-                        alarmCounter = AppData.alarmRepetition
+            // check for collision alarm, if ground speed > 54 kmh to avoid alarms during ground handling
+            if( AppData.myAircraft.groundSpeedMeSec > 15) {
+                if( AppData.vibration_alarm.value == 1 ) {
+                    if( StratuxData.PFLAU.alarmLevel != 0 ) {
+                        if(alarmIsSet == false ){
+                            var wakeLock = AppData.powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP or PowerManager.ON_AFTER_RELEASE, "appname::WakeLock")
+                            wakeLock.acquire()
+                            wakeupTimeout.start()
+                            while( (AppData.isAppAcitve == false) && (wakeupTimeout.isTimeout == false) ) {}  // wait until main activity wake call onResume, vib is not working before
+                            wakeupTimeout.stop()
+                            AppData.vibrator.vibrate(VibrationEffect.createWaveform(AppData.alarmTrafficPattern, AppData.alarmTrafficTiming, -1))
+                            alarmIsSet = true
+                        }
+                    } else {
+                        alarmIsSet = false
                     }
-                    alarmCounter -= 1
-                } else {
-                    alarmCounter = 0
                 }
             }
+
         }
 
         if( splitMsg[0].equals("${'$'}PFLAA") == true ) {

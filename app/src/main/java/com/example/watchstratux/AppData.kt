@@ -74,7 +74,8 @@ object AppData {
     var displayCenterWidth: Float = displayWidth.div(2)
     var displayCenterHeight: Float = displayHeight.div(2)
 
-    val alarmRepetition = 5
+    val alarmTrafficPattern = longArrayOf(500, 200, 500, 200, 500, 200, 500, 200, 500, 200)
+    val alarmTrafficTiming = intArrayOf(255, 0, 255, 0, 255, 0, 255, 0, 255, 0)
 
     var isAppAcitve = false
     lateinit var vibrator: Vibrator
