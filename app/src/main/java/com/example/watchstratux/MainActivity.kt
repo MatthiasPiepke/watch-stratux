@@ -8,6 +8,7 @@ package com.example.watchstratux
 import android.content.Intent
 import android.os.Bundle
 import android.os.PowerManager
+import android.os.VibrationEffect
 import android.util.Log
 import android.view.WindowManager
 import androidx.fragment.app.FragmentActivity
@@ -140,6 +141,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
     override fun onDestroy() {
         super.onDestroy()
         Log.i(TAG,"Destroyed")
+        AppData.vibrator.vibrate(VibrationEffect.createWaveform(AppData.alarmExitPattern, AppData.alarmExitTiming, -1))
         stopService(Intent(this, StratuxForegroundService::class.java))
         mainRecyclerViewAdapter.handlerRadarView.removeCallbacks(mainRecyclerViewAdapter.runnableRadarView)
         mainRecyclerViewAdapter.handlerSystemInfo.removeCallbacks(mainRecyclerViewAdapter.runnableSystemInfo)

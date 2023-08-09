@@ -5,7 +5,6 @@
 
 package com.example.watchstratux
 
-import android.app.Application
 import android.os.PowerManager
 import android.os.Vibrator
 
@@ -66,8 +65,7 @@ object AppData {
 
     var aircraftList: MutableList<Aircraft> = mutableListOf<Aircraft>()
 
-    var aircraftMaxAge: Int = 20
-    var gpsFix: Boolean = false
+    var aircraftMaxAge: Int = 2
 
     var displayWidth: Float = 396f
     var displayHeight: Float = 396f
@@ -76,12 +74,18 @@ object AppData {
 
     val alarmTrafficPattern = longArrayOf(500, 200, 500, 200, 500, 200, 500, 200, 500, 200)
     val alarmTrafficTiming = intArrayOf(255, 0, 255, 0, 255, 0, 255, 0, 255, 0)
+    val alarmConnectionPattern = longArrayOf(500, 200, 500, 200)
+    val alarmConnectionTiming = intArrayOf(128, 0, 128, 0)
+    val alarmExitPattern = longArrayOf(600)
+    val alarmExitTiming = intArrayOf(128)
 
     var isAppAcitve = false
     lateinit var vibrator: Vibrator
     lateinit var powerManager: PowerManager
 
     var connectionStatus = ConnectionStatus.NO_WIFI
+    var connectionAlarmIsSet = false
+
     val compassItemText = arrayOf("N","I","I","E","I","I","S","I","I","W","I","I")
     var zoomLevel = 0
     val zoomLevelRange = arrayOf(intArrayOf(44448, 29632, 14816, 11112, 5556, 3704, 1852), intArrayOf(45000, 30000, 15000, 9000, 6000, 3000, 1500))
@@ -119,6 +123,6 @@ object AppData {
     lateinit var stratuxWsReceiver: StratuxWsReceiver
 
     enum class ConnectionStatus {
-        NO_WIFI, STRATUX, NO_STRATUX
+        NO_WIFI, STRATUX_OK, NO_STRATUX, NO_GPS
     }
 }

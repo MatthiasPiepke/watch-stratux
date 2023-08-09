@@ -5,7 +5,6 @@
 
 package com.example.watchstratux
 
-import android.os.PowerManager
 import android.os.VibrationEffect
 import android.util.Log
 import java.io.BufferedReader
@@ -73,7 +72,6 @@ class StratuxTcpReceiver {
 
     private val readlineTimeout: Timeout = Timeout(3000, "TCP Receiver -readline-")
     private val stopTimeout: Timeout = Timeout(3000, "TCP Receiver -stop-")
-    private val wakeupTimeout: Timeout = Timeout(500, "TCP Receiver -wakeup for alarm-")
 
     private val TAG = "StratuxTcpReceiver"
 
@@ -101,7 +99,8 @@ class StratuxTcpReceiver {
                 readlineTimeout.start()
                 isReceiverRunning = true
                 isReceiverLooping = true
-                AppData.connectionStatus = AppData.ConnectionStatus.STRATUX
+                AppData.connectionStatus = AppData.ConnectionStatus.NO_GPS
+                AppData.connectionAlarmIsSet = false
                 while (isReceiverLooping) {
                     if (socket.isConnected) {
                         var readline: String? = null
@@ -182,11 +181,6 @@ class StratuxTcpReceiver {
                 if( AppData.vibration_alarm.value == 1 ) {
                     if( StratuxData.PFLAU.alarmLevel != 0 ) {
                         if(alarmIsSet == false ){
-                            var wakeLock = AppData.powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP or PowerManager.ON_AFTER_RELEASE, "appname::WakeLock")
-                            wakeLock.acquire()
-                            wakeupTimeout.start()
-                            while( (AppData.isAppAcitve == false) && (wakeupTimeout.isTimeout == false) ) {}  // wait until main activity wake call onResume, vib is not working before
-                            wakeupTimeout.stop()
                             AppData.vibrator.vibrate(VibrationEffect.createWaveform(AppData.alarmTrafficPattern, AppData.alarmTrafficTiming, -1))
                             alarmIsSet = true
                         }
@@ -218,7 +212,7 @@ class StratuxTcpReceiver {
             var relBear = 0.0f
 
             // check if GPS fix has 3D
-            if( AppData.gpsFix == true ) {
+            if( AppData.connectionStatus == AppData.ConnectionStatus.STRATUX_OK ) {
                 // analyse PFLAA and update AppData AircraftList
 
                 // calculate distance
@@ -317,8 +311,8 @@ class StratuxTcpReceiver {
 
         if( splitMsg[0].equals("${'$'}GPGSA") == true ) {
             StratuxData.GPGSA.fix = splitMsg[2].toInt()
-            if( StratuxData.GPGSA.fix == 3 ) AppData.gpsFix = true
-            else AppData.gpsFix = false
+            if( StratuxData.GPGSA.fix == 3 ) AppData.connectionStatus = AppData.ConnectionStatus.STRATUX_OK
+            else AppData.connectionStatus = AppData.ConnectionStatus.NO_GPS
         }
     }
 }

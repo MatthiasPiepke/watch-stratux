@@ -161,7 +161,7 @@ class RadarPaintView(context: Context) : View(context) {
         )
 
         // draw all other things below here only if stratux is connected and stratux gps is 3d fix
-        if ( (AppData.connectionStatus == AppData.ConnectionStatus.STRATUX) && (AppData.gpsFix == true) ) {
+        if ( AppData.connectionStatus == AppData.ConnectionStatus.STRATUX_OK ) {
             // draw compass
             canvas.save()
             canvas.rotate(
@@ -316,17 +316,27 @@ class RadarPaintView(context: Context) : View(context) {
             radarPaint.textSize = 30f
             radarPaint.color = Color.RED
             radarPaint.style = Paint.Style.FILL
-            // error message, when wifi okay, but no stratux server available
-            var noConnectText1 = "NO STRATUX on"
-            var noConnectText2 = ""+AppData.ip_1.value+"."+AppData.ip_2.value+"."+AppData.ip_3.value+"."+AppData.ip_4.value+":"+Integer.parseInt(""+AppData.ip_port.value)
-            // error message, when wifi is not connected
-            if (AppData.connectionStatus == AppData.ConnectionStatus.NO_WIFI) {
-                noConnectText1 = "WIFI"
-                noConnectText2 = "NOT CONNECTED"
-            } else {
-                // error message, when stratux has no valid 3d gps data
-                noConnectText1 = "STRATUX"
-                noConnectText2 = "HAS NO GPS"
+
+            // show right error message
+            var noConnectText1 = ""
+            var noConnectText2 = ""
+            when (AppData.connectionStatus) {
+                AppData.ConnectionStatus.NO_STRATUX -> {
+                    noConnectText1 = "NO STRATUX on"
+                    noConnectText2 = ""+AppData.ip_1.value+"."+AppData.ip_2.value+"."+AppData.ip_3.value+"."+AppData.ip_4.value+":"+Integer.parseInt(""+AppData.ip_port.value)
+                }
+                AppData.ConnectionStatus.NO_WIFI -> {
+                    noConnectText1 = "WIFI"
+                    noConnectText2 = "NOT CONNECTED"
+                }
+                AppData.ConnectionStatus.NO_GPS -> {
+                    noConnectText1 = "STRATUX"
+                    noConnectText2 = "HAS NO GPS"
+                }
+                else -> {
+                    noConnectText1 = "UNKNOWN"
+                    noConnectText2 = "ERROR"
+                }
             }
             canvas.drawText(
                 noConnectText1,
