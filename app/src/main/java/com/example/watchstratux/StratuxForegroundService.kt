@@ -63,7 +63,7 @@ class StratuxForegroundService : Service() {
                     AppData.stratuxTcpReceiver.start()
                     if(BuildConfig.DEBUG) Log.i(TAG, "Stratux TCP Receiver stopped!")
                     if( AppData.connectionAlarmIsSet == false ) {
-                        AppData.vibrator.vibrate(VibrationEffect.createWaveform(AppData.alarmConnectionPattern, AppData.alarmConnectionTiming, -1))
+                        if( AppData.vibration_alarm.value == 1 ) AppData.vibrator.vibrate(VibrationEffect.createWaveform(AppData.alarmConnectionPattern, AppData.alarmConnectionTiming, -1))
                         AppData.connectionAlarmIsSet = true    // will be set back to false in StratuxTcpReceiver when connection is successful
                     }
                 } else {

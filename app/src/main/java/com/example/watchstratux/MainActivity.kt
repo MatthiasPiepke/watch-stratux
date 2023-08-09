@@ -81,13 +81,13 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         val snapHelper: SnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(mWearableRecyclerView)
 
-        // enable/disable updateRadarView when user change focus to another app
+        // enable/disable updateRadarView when user change to another app
         mWearableRecyclerView.adapter = mainRecyclerViewAdapter
         mWearableRecyclerView.viewTreeObserver.addOnWindowFocusChangeListener { hasFocus ->
             if (hasFocus) {
                 val pos = (mWearableRecyclerView.layoutManager as WearableLinearLayoutManager).getPosition(snapHelper.findSnapView(mWearableRecyclerView.layoutManager)!!)
-                if(pos == 0) mainRecyclerViewAdapter.updateRadarView = true
-                if(pos == 1) mainRecyclerViewAdapter.updateSystemInfo = true
+                mainRecyclerViewAdapter.updateRadarView = (pos == 0)
+                mainRecyclerViewAdapter.updateSystemInfo = (pos == 1)
             } else {
                 mainRecyclerViewAdapter.updateRadarView = false
                 mainRecyclerViewAdapter.updateSystemInfo = false
@@ -101,12 +101,8 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     val centerView = snapHelper.findSnapView(mWearableRecyclerView.layoutManager)
                     val pos = (mWearableRecyclerView.layoutManager as WearableLinearLayoutManager).getPosition(centerView!!)
-                    Log.i(TAG, "Snapped Item Position: " + pos)
-
-                    // enable/disable updateRadarView
-                    if (pos == 0) mainRecyclerViewAdapter.updateRadarView = true else mainRecyclerViewAdapter.updateRadarView = false
-
-                    if( pos == 1 ) mainRecyclerViewAdapter.updateSystemInfo = true else mainRecyclerViewAdapter.updateSystemInfo = false
+                    mainRecyclerViewAdapter.updateRadarView = (pos == 0)
+                    mainRecyclerViewAdapter.updateSystemInfo = (pos == 1)
                 }
             }
         })
@@ -122,15 +118,11 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
     override fun onResume() {
         super.onResume()
         Log.i(TAG,"Resumed")
-        // Active Status needed by vibration feature
-        AppData.isAppAcitve = true
     }
 
     override fun onPause() {
         super.onPause()
         Log.i(TAG,"Paused")
-        // Active Status needed by vibration feature
-        AppData.isAppAcitve = false
     }
 
     override fun onStop() {
@@ -141,7 +133,9 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
     override fun onDestroy() {
         super.onDestroy()
         Log.i(TAG,"Destroyed")
-        AppData.vibrator.vibrate(VibrationEffect.createWaveform(AppData.alarmExitPattern, AppData.alarmExitTiming, -1))
+        if( AppData.vibration_alarm.value == 1 ) {
+            AppData.vibrator.vibrate(VibrationEffect.createWaveform(AppData.alarmExitPattern, AppData.alarmExitTiming, -1))
+        }
         stopService(Intent(this, StratuxForegroundService::class.java))
         mainRecyclerViewAdapter.handlerRadarView.removeCallbacks(mainRecyclerViewAdapter.runnableRadarView)
         mainRecyclerViewAdapter.handlerSystemInfo.removeCallbacks(mainRecyclerViewAdapter.runnableSystemInfo)

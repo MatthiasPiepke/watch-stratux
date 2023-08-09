@@ -79,7 +79,6 @@ object AppData {
     val alarmExitPattern = longArrayOf(600)
     val alarmExitTiming = intArrayOf(128)
 
-    var isAppAcitve = false
     lateinit var vibrator: Vibrator
     lateinit var powerManager: PowerManager
 
