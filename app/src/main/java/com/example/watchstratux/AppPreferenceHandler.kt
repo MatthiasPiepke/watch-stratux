@@ -23,11 +23,15 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
             if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Init_KEY not found ...")
             if (savePreference(AppPreference("Init_KEY", 1))) {
                 Log.i("AppPreferenceHandler:", "Init_KEY created ...")
+                for (pref in DefaultPreferences.defaultPreferences) {
+                    savePreference(pref)
+                }
+                if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Default Preferences stored")
             }
         }
     }
 
-    constructor(context: Context, preferenceFile: String, defaultPreferences: Array<AppPreference>): this(context, preferenceFile){
+    /*constructor(context: Context, preferenceFile: String, defaultPreferences: Array<AppPreference<T>>): this(context, preferenceFile){
         if ( isAppPreferenceFileNew == true) {
             if (clearAllPrefences() == true) {
                 for (pref in DefaultPreferences.defaultPreferences) {
@@ -36,7 +40,7 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
                 if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Default Preferences stored")
             }
         }
-    }
+    }*/
 
     fun clearAllPrefences(): Boolean {
         val cleared = appPreferences.edit().clear().commit()
@@ -48,34 +52,41 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
         return cleared
     }
 
-    fun loadPreference(pref: AppPreference): Boolean {
+    fun <T>loadPreference(pref: AppPreference<T>): Boolean {
         var loadIssue = false
 
-        val value: Int
-        value = appPreferences.getInt(pref.key, -1)
-
-        if (value != -1) {
-            pref.value = value
-            if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " load " + pref.value)
-        } else {
-            if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + "load operation FAILED")
-            loadIssue = true
+        when( pref.value as Any) {
+            is Int -> {
+                var value = appPreferences.getInt(pref.key, -1)
+                if (value != -1) {
+                    pref.value = value as T
+                    if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " load " + pref.value)
+                } else {
+                    if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + "load operation FAILED")
+                    loadIssue = true
+                }
+            }
         }
-
         return !loadIssue
     }
 
-    fun savePreference(pref: AppPreference): Boolean {
+    fun <T>savePreference(pref: AppPreference<T>): Boolean {
         var saveIssue = false
-        if (appPreferences.edit().putInt(pref.key, pref.value).commit() == true) {
-            if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " saved " + pref.value)
-        } else {
-            if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + "save operation FAILED")
-            saveIssue = true
+
+        when( pref.value as Any) {
+            is Int -> {
+                if (appPreferences.edit().putInt(pref.key, pref.value as Int).commit() == true) {
+                    if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " saved " + pref.value)
+                } else {
+                    if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + "save operation FAILED")
+                    saveIssue = true
+                }
+            }
         }
+
         return !saveIssue
     }
-
+/*
     fun clearPreference(pref: AppPreference): Boolean {
         var clearIssue = false
         if (appPreferences.edit().remove(pref.key).commit() == true) {
@@ -86,8 +97,8 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
         }
         return !clearIssue
     }
-
-    fun loadPreferences(prefArray: Array<AppPreference>): Boolean {
+*/
+    fun loadPreferences(prefArray: Array<out AppPreference<out Any>>): Boolean {
         var loadIssue = false
         for (pref in prefArray) {
             if (loadPreference(pref) == false) loadIssue = true

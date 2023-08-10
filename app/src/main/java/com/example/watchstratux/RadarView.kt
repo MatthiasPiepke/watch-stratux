@@ -236,7 +236,7 @@ class RadarPaintView(context: Context) : View(context) {
                                     radarPaint.color = Color.WHITE
                                     radarPaint.style = Paint.Style.STROKE
                                     //canvas.drawLine(aircraftIcon.x.toFloat(), aircraftIcon.y.toFloat(), aircraftIcon.textX.toFloat(), aircraftIcon.textY.toFloat(), radarPaint)
-                                    if( AppData.show_tracks.value == 1 ) canvas.drawPath(aircraftIcon.track, radarPaint)
+                                    if( AppData.show_tracks.value as Boolean == true ) canvas.drawPath(aircraftIcon.track, radarPaint)
                                     // draw relVert text
                                     radarPaint.style = Paint.Style.FILL
                                     canvas.drawText(relVertText, aircraftIcon.textX.toFloat(), (aircraftIcon.textY + 18).toFloat(), radarPaint)
@@ -246,7 +246,7 @@ class RadarPaintView(context: Context) : View(context) {
                                     radarPaint.style = Paint.Style.FILL
                                     canvas.drawPath(aircraftIcon.body, radarPaint)
                                     radarPaint.style = Paint.Style.STROKE
-                                    if( AppData.show_tracks.value == 1 ) canvas.drawPath(aircraftIcon.track, radarPaint)
+                                    if( AppData.show_tracks.value as Boolean== true ) canvas.drawPath(aircraftIcon.track, radarPaint)
                                     // draw relVert text
                                     radarPaint.style = Paint.Style.FILL
                                     canvas.drawText(relVertText, aircraftIcon.textX.toFloat(), (aircraftIcon.textY + 18).toFloat(), radarPaint)
@@ -293,7 +293,7 @@ class RadarPaintView(context: Context) : View(context) {
                 radarPaint
             )
             // draw my track
-            if( AppData.show_tracks.value == 1 ) {
+            if( AppData.show_tracks.value as Boolean == true ) {
                 val myGroundSpeed_in_px = (AppData.MyAircraft.groundSpeedMeSec * 60 * AppData.displayWidth / (2 * AppData.zoomLevelRange[AppData.distance_in_km.value][AppData.zoomLevel])).toInt()
                 radarPaint.color = Color.WHITE
                 radarPaint.flags = 0

@@ -74,20 +74,21 @@ class SettingsRecyclerViewAdapter(context: Context) : RecyclerView.Adapter<Setti
             holder.textViewItem_up.textSize = 14f
             holder.textViewItem_up.setText("Show Tracks")
             holder.textViewItem_down.visibility = View.GONE
-            holder.switch.setChecked(if( AppData.show_tracks.value == 1 ) true else false)
+            holder.switch.setChecked(AppData.show_tracks.value as Boolean)
             holder.switch.setOnClickListener {
-                if( holder.switch.isChecked == true ) AppData.show_tracks.value = 1
-                else AppData.show_tracks.value = 0
+                AppData.show_tracks.value = true
+                //if( holder.switch.isChecked == true ) AppData.show_tracks.value = true
+                //else AppData.show_tracks.value = false
                 AppData.preferenceHandler.savePreference(AppData.show_tracks)
             }
             holder.cardView.setOnClickListener {
                 if( holder.switch.isChecked == true ) {
                     holder.switch.setChecked(false)
-                    AppData.show_tracks.value = 0
+                    AppData.show_tracks.value = false
                 }
                 else {
                     holder.switch.setChecked(true)
-                    AppData.show_tracks.value = 1
+                    AppData.show_tracks.value = true
                 }
                 AppData.preferenceHandler.savePreference(AppData.show_tracks)
             }

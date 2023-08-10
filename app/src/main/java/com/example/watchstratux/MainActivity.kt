@@ -54,8 +54,11 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        AppData.preferenceHandler = AppPreferenceHandler(this, "RadarPreferences", DefaultPreferences.defaultPreferences)
-        AppData.preferenceHandler.loadPreferences(AppData.preferences)
+        //AppData.preferenceHandler = AppPreferenceHandler(this, "RadarPreferences", DefaultPreferences.defaultPreferences)
+        AppData.preferenceHandler.clearAllPrefences()
+        AppData.preferenceHandler = AppPreferenceHandler(this, "RadarPreferences")
+
+        //AppData.preferenceHandler.loadPreferences(AppData.preferences)
         AppData.vibrator = getSystemService(android.app.Activity.VIBRATOR_SERVICE) as android.os.Vibrator
         AppData.displayWidth = (getSystemService(WINDOW_SERVICE) as WindowManager).currentWindowMetrics.bounds.width().toFloat()
         AppData.displayHeight = (getSystemService(WINDOW_SERVICE) as WindowManager).currentWindowMetrics.bounds.height().toFloat()
@@ -73,7 +76,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         wakeLock.acquire()
 
         // start TCP and WebSocket receiver in a foreground service, in order not to be killed by doze mode
-        startForegroundService(Intent(this, StratuxForegroundService::class.java))
+        //startForegroundService(Intent(this, StratuxForegroundService::class.java))
 
         val mWearableRecyclerView = findViewById<WearableRecyclerView>(R.id.main_view)
         mWearableRecyclerView.layoutManager = WearableLinearLayoutManager(this, CustomScrollingLayoutCallback())

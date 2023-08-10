@@ -6,22 +6,22 @@
 package com.example.watchstratux
 
 object DefaultPreferences {
-    var ip_1: AppPreference = AppPreference("IP_1_KEY", 192)
-    var ip_2: AppPreference = AppPreference("IP_2_KEY", 168)
-    var ip_3: AppPreference = AppPreference("IP_3_KEY", BuildConfig.IP_3)
-    var ip_4: AppPreference = AppPreference("IP_4_KEY", BuildConfig.IP_4)
-    var ip_port: AppPreference = AppPreference("IP_PORT_KEY", 2000)
+    var ip_1 = AppPreference<Int>("IP_1_KEY", 192)
+    var ip_2 = AppPreference<Int>("IP_2_KEY", 168)
+    var ip_3 = AppPreference<Int>("IP_3_KEY", BuildConfig.IP_3)
+    var ip_4 = AppPreference<Int>("IP_4_KEY", BuildConfig.IP_4)
+    var ip_port = AppPreference<Int>("IP_PORT_KEY", 2000)
 
-    var lower_vertical_limit: AppPreference = AppPreference("LOWER_VERT_LIMIT_KEY", 0)
-    var upper_vertical_limit: AppPreference = AppPreference("UPPER_VERT_LIMIT_KEY", 0)
+    var lower_vertical_limit = AppPreference<Int>("LOWER_VERT_LIMIT_KEY", 0)
+    var upper_vertical_limit = AppPreference<Int>("UPPER_VERT_LIMIT_KEY", 0)
 
-    var show_tracks: AppPreference = AppPreference("SHOW_TRACKS_KEY", 1)            // 1 show, 0 don't show
-    var vibration_alarm: AppPreference = AppPreference("ALARM_VIBRATION_KEY", 1)    // 1 vibrate, 0 don't vibrate at alert
-    var distance_in_km: AppPreference = AppPreference("DISTANCE_IN_KM_KEY", 1)      // 1 in KM, 0 in NM
-    var altitude_in_ft: AppPreference = AppPreference("ALTITUDE_IN_FT_KEY", 1)      // 1 in Feet, 0 in Meter
+    var show_tracks = AppPreference("SHOW_TRACKS_KEY", true)
+    var vibration_alarm = AppPreference<Int>("ALARM_VIBRATION_KEY", 1)    // 1 vibrate, 0 don't vibrate at alert
+    var distance_in_km = AppPreference<Int>("DISTANCE_IN_KM_KEY", 1)      // 1 in KM, 0 in NM
+    var altitude_in_ft = AppPreference<Int>("ALTITUDE_IN_FT_KEY", 1)      // 1 in Feet, 0 in Meter
 
-    var defaultPreferences: Array<AppPreference> =
-        arrayOf<AppPreference>(
+    var defaultPreferences =
+        arrayOf(
             ip_1,
             ip_2,
             ip_3,

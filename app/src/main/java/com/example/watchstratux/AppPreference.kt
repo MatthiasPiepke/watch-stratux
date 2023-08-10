@@ -5,4 +5,4 @@
 
 package com.example.watchstratux
 
-class AppPreference(var key: String, var value: Int)
+class AppPreference<T>(var key: String, var value: T)
