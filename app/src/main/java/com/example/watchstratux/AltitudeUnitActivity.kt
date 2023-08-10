@@ -23,7 +23,7 @@ class AltitudeUnitActivity : Activity() {
         val radio_button_ft = findViewById(R.id.altitude_unit_radioButton_ft) as RadioButton
         val radio_button_m = findViewById(R.id.altitude_unit_radioButton_m) as RadioButton
 
-        if (AppData.altitudeFt.value == 1) {
+        if (AppData.preferences.altitudeFt.value == 1) {
             radio_button_ft.setChecked(true)
             radio_button_m.setChecked(false)
         } else {
@@ -34,14 +34,14 @@ class AltitudeUnitActivity : Activity() {
         radio_button_ft.setOnClickListener {
             radio_button_ft.setChecked(true)
             radio_button_m.setChecked(false)
-            AppData.altitudeFt.value = 1
-            AppData.preferenceHandler.savePreference(AppData.altitudeFt)
+            AppData.preferences.altitudeFt.value = 1
+            AppData.preferenceHandler.savePreference(AppData.preferences.altitudeFt)
         }
         radio_button_m.setOnClickListener {
             radio_button_ft.setChecked(false)
             radio_button_m.setChecked(true)
-            AppData.altitudeFt.value = 0
-            AppData.preferenceHandler.savePreference(AppData.altitudeFt)
+            AppData.preferences.altitudeFt.value = 0
+            AppData.preferenceHandler.savePreference(AppData.preferences.altitudeFt)
         }
     }
 }

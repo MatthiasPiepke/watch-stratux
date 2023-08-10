@@ -134,7 +134,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
     override fun onDestroy() {
         super.onDestroy()
         Log.i(TAG,"Destroyed")
-        if( AppData.vibrationAlarm.value == true ) {
+        if( AppData.preferences.vibrationAlarm.value == true ) {
             AppData.vibrator.vibrate(VibrationEffect.createWaveform(AppData.alarmExitPattern, AppData.alarmExitTiming, -1))
         }
         stopService(Intent(this, StratuxForegroundService::class.java))

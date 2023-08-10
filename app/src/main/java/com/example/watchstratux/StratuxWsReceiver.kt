@@ -40,7 +40,7 @@ object StratuxStatusData {
 
 class StratuxWsReceiver() {
 
-    private var webSocketClient = mWebSocketClient(URI("ws://"+AppData.ipAddress.value+"/status"))
+    private var webSocketClient = mWebSocketClient(URI("ws://"+AppData.preferences.ipAddress.value+"/status"))
 
     private val TAG = "StratuxWsReceiver"
 
@@ -85,7 +85,7 @@ class StratuxWsReceiver() {
     }
 
     fun start() {
-        webSocketClient = mWebSocketClient(URI("ws://"+AppData.ipAddress.value+"/status"))
+        webSocketClient = mWebSocketClient(URI("ws://"+AppData.preferences.ipAddress.value+"/status"))
         webSocketClient.connect()
         Thread.sleep(1000)
     }

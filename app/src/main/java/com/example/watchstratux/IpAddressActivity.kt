@@ -47,7 +47,7 @@ class IpAddressActivity : Activity() {
         val button_9 = findViewById<View>(R.id.ipSettingButton9) as Button
 
         var ipAddressPosition = 0
-        var ipString = AppData.ipAddress.value
+        var ipString = AppData.preferences.ipAddress.value
         var ipText = ""
 
         fun updateIpTextView(){
@@ -147,8 +147,8 @@ class IpAddressActivity : Activity() {
             AppData.ip_3.value = ipString.substring(8..10).toInt()
             AppData.ip_4.value = ipString.substring(12..14).toInt()*/
 
-            AppData.ipAddress.value = ipString
-            AppData.preferenceHandler.savePreference(AppData.ipAddress)
+            AppData.preferences.ipAddress.value = ipString
+            AppData.preferenceHandler.savePreference(AppData.preferences.ipAddress)
             /*AppData.preferenceHandler.savePreference(AppData.ip_1)
             AppData.preferenceHandler.savePreference(AppData.ip_2)
             AppData.preferenceHandler.savePreference(AppData.ip_3)
