@@ -11,15 +11,12 @@ import android.util.Log
 
 class AppPreferenceHandler(context: Context, preferenceFile: String) {
     private var appPreferences: SharedPreferences
-    //private var isAppPreferenceFileNew = false
 
     init {
         appPreferences = context.getSharedPreferences(preferenceFile, Context.MODE_PRIVATE)
         if (appPreferences.getInt("Init_KEY", 0) == 1) {
-            //isAppPreferenceFileNew = false
             if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Init_KEY found ...")
         } else {
-            //isAppPreferenceFileNew = true
             if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Init_KEY not found ...")
             if (savePreference(AppPreference("Init_KEY", 1))) {
                 Log.i("AppPreferenceHandler:", "Init_KEY created ...")
@@ -31,22 +28,10 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
         }
     }
 
-    /*constructor(context: Context, preferenceFile: String, defaultPreferences: Array<AppPreference<T>>): this(context, preferenceFile){
-        if ( isAppPreferenceFileNew == true) {
-            if (clearAllPrefences() == true) {
-                for (pref in DefaultPreferences.defaultPreferences) {
-                    savePreference(pref)
-                }
-                if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Default Preferences stored")
-            }
-        }
-    }*/
-
     fun clearAllPrefences(): Boolean {
         val cleared = appPreferences.edit().clear().commit()
         if (cleared == true)
         {
-            //savePreference(AppPreference("Init_KEY", 1))
             if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Clear OKAY")
         } else if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Clear FAILED")
         return cleared

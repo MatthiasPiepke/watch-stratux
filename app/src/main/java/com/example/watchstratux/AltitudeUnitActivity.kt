@@ -9,7 +9,6 @@ import android.app.Activity
 import android.os.Bundle
 import android.widget.RadioButton
 import com.example.watchstratux.databinding.ActivityAltitudeUnitBinding
-import com.example.watchstratux.SettingsActivity
 
 class AltitudeUnitActivity : Activity() {
 
@@ -24,7 +23,7 @@ class AltitudeUnitActivity : Activity() {
         val radio_button_ft = findViewById(R.id.altitude_unit_radioButton_ft) as RadioButton
         val radio_button_m = findViewById(R.id.altitude_unit_radioButton_m) as RadioButton
 
-        if (AppData.altitude_in_ft.value == 1) {
+        if (AppData.altitudeFt.value == 1) {
             radio_button_ft.setChecked(true)
             radio_button_m.setChecked(false)
         } else {
@@ -35,14 +34,14 @@ class AltitudeUnitActivity : Activity() {
         radio_button_ft.setOnClickListener {
             radio_button_ft.setChecked(true)
             radio_button_m.setChecked(false)
-            AppData.altitude_in_ft.value = 1
-            AppData.preferenceHandler.savePreference(AppData.altitude_in_ft)
+            AppData.altitudeFt.value = 1
+            AppData.preferenceHandler.savePreference(AppData.altitudeFt)
         }
         radio_button_m.setOnClickListener {
             radio_button_ft.setChecked(false)
             radio_button_m.setChecked(true)
-            AppData.altitude_in_ft.value = 0
-            AppData.preferenceHandler.savePreference(AppData.altitude_in_ft)
+            AppData.altitudeFt.value = 0
+            AppData.preferenceHandler.savePreference(AppData.altitudeFt)
         }
     }
 }

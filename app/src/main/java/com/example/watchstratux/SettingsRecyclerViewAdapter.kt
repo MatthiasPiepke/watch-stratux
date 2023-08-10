@@ -34,7 +34,7 @@ class SettingsRecyclerViewAdapter(context: Context) : RecyclerView.Adapter<Setti
         if (position == 0){
             holder.switch.visibility = View.GONE
             holder.textViewItem_up.setText("IP Settings")
-            holder.textViewItem_down.setText(AppData.ipAddress.value + " : " + AppData.ip_port.value.toString())
+            holder.textViewItem_down.setText(AppData.ipAddress.value + " : " + AppData.ipPort.value.toString())
             holder.cardView.setOnClickListener {
                 context.startActivity(Intent(context, IpAddressActivity::class.java))
             }
@@ -52,50 +52,50 @@ class SettingsRecyclerViewAdapter(context: Context) : RecyclerView.Adapter<Setti
             holder.textViewItem_up.textSize = 14f
             holder.textViewItem_up.setText("Vibration Alarm")
             holder.textViewItem_down.visibility = View.GONE
-            holder.switch.setChecked(if( AppData.vibration_alarm.value == true ) true else false)
+            holder.switch.setChecked(if( AppData.vibrationAlarm.value == true ) true else false)
             holder.switch.setOnClickListener {
-                AppData.vibration_alarm.value = holder.switch.isChecked
-                AppData.preferenceHandler.savePreference(AppData.vibration_alarm)
+                AppData.vibrationAlarm.value = holder.switch.isChecked
+                AppData.preferenceHandler.savePreference(AppData.vibrationAlarm)
             }
             holder.cardView.setOnClickListener {
                 if( holder.switch.isChecked == true ) {
                     holder.switch.setChecked(false)
-                    AppData.vibration_alarm.value = false
+                    AppData.vibrationAlarm.value = false
                 }
                 else {
                     holder.switch.setChecked(true)
-                    AppData.vibration_alarm.value = true
+                    AppData.vibrationAlarm.value = true
                 }
-                AppData.preferenceHandler.savePreference(AppData.vibration_alarm)
+                AppData.preferenceHandler.savePreference(AppData.vibrationAlarm)
             }
         }
         if (position == 3){
             holder.textViewItem_up.textSize = 14f
             holder.textViewItem_up.setText("Show Tracks")
             holder.textViewItem_down.visibility = View.GONE
-            holder.switch.setChecked(AppData.show_tracks.value as Boolean)
+            holder.switch.setChecked(AppData.showTracks.value as Boolean)
             holder.switch.setOnClickListener {
-                if( holder.switch.isChecked == true ) AppData.show_tracks.value = true
-                else AppData.show_tracks.value = false
-                AppData.preferenceHandler.savePreference(AppData.show_tracks)
+                if( holder.switch.isChecked == true ) AppData.showTracks.value = true
+                else AppData.showTracks.value = false
+                AppData.preferenceHandler.savePreference(AppData.showTracks)
             }
             holder.cardView.setOnClickListener {
                 if( holder.switch.isChecked == true ) {
                     holder.switch.setChecked(false)
-                    AppData.show_tracks.value = false
+                    AppData.showTracks.value = false
                 }
                 else {
                     holder.switch.setChecked(true)
-                    AppData.show_tracks.value = true
+                    AppData.showTracks.value = true
                 }
-                AppData.preferenceHandler.savePreference(AppData.show_tracks)
+                AppData.preferenceHandler.savePreference(AppData.showTracks)
             }
         }
         if (position == 4){
             holder.switch.visibility = View.GONE
             holder.textViewItem_up.textSize = 14f
             holder.textViewItem_up.setText("Distance Unit")
-            if(AppData.distance_in_km.value == 1) holder.textViewItem_down.setText("Kilometer")
+            if(AppData.distanceKm.value == 1) holder.textViewItem_down.setText("Kilometer")
             else holder.textViewItem_down.setText("Nautical Miles")
             holder.cardView.setOnClickListener {
                 context.startActivity(Intent(context, DistanceUnitActivity::class.java))
@@ -105,7 +105,7 @@ class SettingsRecyclerViewAdapter(context: Context) : RecyclerView.Adapter<Setti
             holder.switch.visibility = View.GONE
             holder.textViewItem_up.textSize = 14f
             holder.textViewItem_up.setText("Altitude Unit")
-            if(AppData.altitude_in_ft.value == 1) holder.textViewItem_down.setText("Feet")
+            if(AppData.altitudeFt.value == 1) holder.textViewItem_down.setText("Feet")
             else holder.textViewItem_down.setText("Meter")
             holder.cardView.setOnClickListener {
                 context.startActivity(Intent(context, AltitudeUnitActivity::class.java))

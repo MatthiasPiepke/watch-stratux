@@ -88,7 +88,7 @@ class StratuxTcpReceiver {
 
         if(isReceiverRunning == false) {
             try {
-                socket.connect(InetSocketAddress(AppData.ipAddress.value, AppData.ip_port.value), 100)
+                socket.connect(InetSocketAddress(AppData.ipAddress.value, AppData.ipPort.value), 100)
             } catch (e: Exception) {
                 if(BuildConfig.DEBUG) Log.e(TAG, "Error 2: Could not open the socket! $e")
             }
@@ -178,7 +178,7 @@ class StratuxTcpReceiver {
 
             // check for collision alarm, if ground speed > 54 kmh to avoid alarms during ground handling
             if( AppData.myAircraft.groundSpeedMeSec > 15) {
-                if( AppData.vibration_alarm.value == true ) {
+                if( AppData.vibrationAlarm.value == true ) {
                     if( StratuxData.PFLAU.alarmLevel != 0 ) {
                         if(alarmIsSet == false ){
                             AppData.vibrator.vibrate(VibrationEffect.createWaveform(AppData.alarmTrafficPattern, AppData.alarmTrafficTiming, -1))

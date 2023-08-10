@@ -30,19 +30,19 @@ class VerticalLimitActivity : Activity() {
         np1.minValue = 0
         np1.maxValue = AppData.lowerLimitValues.size - 1
         np1.displayedValues = AppData.lowerLimitValues
-        np1.value = AppData.lower_vertical_limit.value
+        np1.value = AppData.lowerVerticalLimit.value
 
         np2.minValue = 0
         np2.maxValue = AppData.upperLimitValues.size - 1
         np2.displayedValues = AppData.upperLimitValues
-        np2.value = AppData.upper_vertical_limit.value
+        np2.value = AppData.upperVerticalLimit.value
 
 
         okayButton.setOnClickListener {
-            AppData.lower_vertical_limit.value = np1.value
-            AppData.upper_vertical_limit.value = np2.value
-            AppData.preferenceHandler.savePreference(AppData.lower_vertical_limit)
-            AppData.preferenceHandler.savePreference(AppData.upper_vertical_limit)
+            AppData.lowerVerticalLimit.value = np1.value
+            AppData.upperVerticalLimit.value = np2.value
+            AppData.preferenceHandler.savePreference(AppData.lowerVerticalLimit)
+            AppData.preferenceHandler.savePreference(AppData.upperVerticalLimit)
             finish()
         }
     }

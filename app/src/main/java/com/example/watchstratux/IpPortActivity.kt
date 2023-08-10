@@ -46,7 +46,7 @@ class IpPortActivity : Activity() {
         val button_9 = findViewById<View>(R.id.portSettingButton9) as Button
 
         var portPosition = 0
-        var portString = AppData.ip_port.value.toString().padStart(5, '0')
+        var portString = AppData.ipPort.value.toString().padStart(5, '0')
         var portText = ""
 
         fun updatePortTextView(){
@@ -141,8 +141,8 @@ class IpPortActivity : Activity() {
             finish()
         }
         okayButton.setOnClickListener {
-            AppData.ip_port.value = portString.toInt()
-            AppData.preferenceHandler.savePreference(AppData.ip_port)
+            AppData.ipPort.value = portString.toInt()
+            AppData.preferenceHandler.savePreference(AppData.ipPort)
             AppData.stratuxTcpReceiver.stop()
             finish()
         }
