@@ -323,7 +323,7 @@ class RadarPaintView(context: Context) : View(context) {
             when (AppData.connectionStatus) {
                 AppData.ConnectionStatus.NO_STRATUX -> {
                     noConnectText1 = "NO STRATUX on"
-                    noConnectText2 = ""+AppData.ip_1.value+"."+AppData.ip_2.value+"."+AppData.ip_3.value+"."+AppData.ip_4.value+":"+Integer.parseInt(""+AppData.ip_port.value)
+                    noConnectText2 = AppData.ipAddress.value as String + ":" + AppData.ip_port.value.toString()
                 }
                 AppData.ConnectionStatus.NO_WIFI -> {
                     noConnectText1 = "WIFI"

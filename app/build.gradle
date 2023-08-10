@@ -17,12 +17,10 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("int", "IP_3", "178")
-            buildConfigField("int", "IP_4", "39")
+            buildConfigField "String", "IP_ADDRESS", '"192.168.178.039"'
         }
         release {
-            buildConfigField("int", "IP_3", "0")
-            buildConfigField("int", "IP_4", "1")
+            buildConfigField "String", "IP_ADDRESS", '"192.168.000.001"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

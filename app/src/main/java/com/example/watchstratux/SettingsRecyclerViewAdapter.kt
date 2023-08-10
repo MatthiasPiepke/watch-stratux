@@ -34,7 +34,7 @@ class SettingsRecyclerViewAdapter(context: Context) : RecyclerView.Adapter<Setti
         if (position == 0){
             holder.switch.visibility = View.GONE
             holder.textViewItem_up.setText("IP Settings")
-            holder.textViewItem_down.setText("" + AppData.ip_1.value.toString() + "." + AppData.ip_2.value.toString() + "." + AppData.ip_3.value.toString() + "." + AppData.ip_4.value.toString() + " : " + AppData.ip_port.value.toString())
+            holder.textViewItem_down.setText(AppData.ipAddress.value + " : " + AppData.ip_port.value.toString())
             holder.cardView.setOnClickListener {
                 context.startActivity(Intent(context, IpAddressActivity::class.java))
             }
@@ -52,20 +52,19 @@ class SettingsRecyclerViewAdapter(context: Context) : RecyclerView.Adapter<Setti
             holder.textViewItem_up.textSize = 14f
             holder.textViewItem_up.setText("Vibration Alarm")
             holder.textViewItem_down.visibility = View.GONE
-            holder.switch.setChecked(if( AppData.vibration_alarm.value == 1 ) true else false)
+            holder.switch.setChecked(if( AppData.vibration_alarm.value == true ) true else false)
             holder.switch.setOnClickListener {
-                if( holder.switch.isChecked == true ) AppData.vibration_alarm.value = 1
-                else AppData.vibration_alarm.value = 0
+                AppData.vibration_alarm.value = holder.switch.isChecked
                 AppData.preferenceHandler.savePreference(AppData.vibration_alarm)
             }
             holder.cardView.setOnClickListener {
                 if( holder.switch.isChecked == true ) {
                     holder.switch.setChecked(false)
-                    AppData.vibration_alarm.value = 0
+                    AppData.vibration_alarm.value = false
                 }
                 else {
                     holder.switch.setChecked(true)
-                    AppData.vibration_alarm.value = 1
+                    AppData.vibration_alarm.value = true
                 }
                 AppData.preferenceHandler.savePreference(AppData.vibration_alarm)
             }
@@ -76,9 +75,8 @@ class SettingsRecyclerViewAdapter(context: Context) : RecyclerView.Adapter<Setti
             holder.textViewItem_down.visibility = View.GONE
             holder.switch.setChecked(AppData.show_tracks.value as Boolean)
             holder.switch.setOnClickListener {
-                AppData.show_tracks.value = true
-                //if( holder.switch.isChecked == true ) AppData.show_tracks.value = true
-                //else AppData.show_tracks.value = false
+                if( holder.switch.isChecked == true ) AppData.show_tracks.value = true
+                else AppData.show_tracks.value = false
                 AppData.preferenceHandler.savePreference(AppData.show_tracks)
             }
             holder.cardView.setOnClickListener {

@@ -11,15 +11,15 @@ import android.util.Log
 
 class AppPreferenceHandler(context: Context, preferenceFile: String) {
     private var appPreferences: SharedPreferences
-    private var isAppPreferenceFileNew = false
+    //private var isAppPreferenceFileNew = false
 
     init {
         appPreferences = context.getSharedPreferences(preferenceFile, Context.MODE_PRIVATE)
         if (appPreferences.getInt("Init_KEY", 0) == 1) {
-            isAppPreferenceFileNew = false
+            //isAppPreferenceFileNew = false
             if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Init_KEY found ...")
         } else {
-            isAppPreferenceFileNew = true
+            //isAppPreferenceFileNew = true
             if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Init_KEY not found ...")
             if (savePreference(AppPreference("Init_KEY", 1))) {
                 Log.i("AppPreferenceHandler:", "Init_KEY created ...")
@@ -46,7 +46,7 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
         val cleared = appPreferences.edit().clear().commit()
         if (cleared == true)
         {
-            savePreference(AppPreference("Init_KEY", 1))
+            //savePreference(AppPreference("Init_KEY", 1))
             if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Clear OKAY")
         } else if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Clear FAILED")
         return cleared
@@ -62,9 +62,23 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
                     pref.value = value as T
                     if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " load " + pref.value)
                 } else {
-                    if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + "load operation FAILED")
+                    if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " load operation FAILED")
                     loadIssue = true
                 }
+            }
+            is String -> {
+                var value = appPreferences.getString(pref.key, "-1")
+                if (value != "-1") {
+                    pref.value = value as T
+                    if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " load " + pref.value)
+                } else {
+                    if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " load operation FAILED")
+                    loadIssue = true
+                }
+            }
+            is Boolean -> {
+                var value = appPreferences.getBoolean(pref.key, false)
+                if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " load " + pref.value)
             }
         }
         return !loadIssue
@@ -78,7 +92,23 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
                 if (appPreferences.edit().putInt(pref.key, pref.value as Int).commit() == true) {
                     if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " saved " + pref.value)
                 } else {
-                    if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + "save operation FAILED")
+                    if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " save operation FAILED")
+                    saveIssue = true
+                }
+            }
+            is String -> {
+                if (appPreferences.edit().putString(pref.key, pref.value as String).commit() == true) {
+                    if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " saved " + pref.value)
+                } else {
+                    if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " save operation FAILED")
+                    saveIssue = true
+                }
+            }
+            is Boolean -> {
+                if (appPreferences.edit().putBoolean(pref.key, pref.value as Boolean).commit() == true) {
+                    if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " saved " + pref.value)
+                } else {
+                    if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " save operation FAILED")
                     saveIssue = true
                 }
             }

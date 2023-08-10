@@ -9,25 +9,19 @@ import android.os.PowerManager
 import android.os.Vibrator
 
 object AppData {
-    var ip_1 = AppPreference(DefaultPreferences.ip_1.key, DefaultPreferences.ip_1.value)
-    var ip_2 = AppPreference(DefaultPreferences.ip_2.key, DefaultPreferences.ip_2.value)
-    var ip_3 = AppPreference(DefaultPreferences.ip_3.key, DefaultPreferences.ip_3.value)
-    var ip_4 = AppPreference(DefaultPreferences.ip_4.key, DefaultPreferences.ip_4.value)
-    var ip_port = AppPreference(DefaultPreferences.ip_port.key, DefaultPreferences.ip_port.value)
+    var ipAddress = AppPreference("IP_ADDRESS_KEY", BuildConfig.IP_ADDRESS)
+    var ip_port = AppPreference("IP_PORT_KEY", 2000)
 
-    var lower_vertical_limit = AppPreference(DefaultPreferences.lower_vertical_limit.key, DefaultPreferences.lower_vertical_limit.value)
-    var upper_vertical_limit = AppPreference(DefaultPreferences.upper_vertical_limit.key, DefaultPreferences.upper_vertical_limit.value)
+    var lower_vertical_limit = AppPreference("LOWER_VERT_LIMIT_KEY", 0)
+    var upper_vertical_limit = AppPreference("UPPER_VERT_LIMIT_KEY", 0)
 
-    var show_tracks = AppPreference(DefaultPreferences.show_tracks.key, DefaultPreferences.show_tracks.value)
-    var vibration_alarm = AppPreference(DefaultPreferences.vibration_alarm.key, DefaultPreferences.vibration_alarm.value)
-    var distance_in_km = AppPreference(DefaultPreferences.distance_in_km.key, DefaultPreferences.distance_in_km.value)
-    var altitude_in_ft = AppPreference(DefaultPreferences.altitude_in_ft.key, DefaultPreferences.altitude_in_ft.value)
+    var show_tracks = AppPreference("SHOW_TRACKS_KEY", true)
+    var vibration_alarm = AppPreference("ALARM_VIBRATION_KEY", true)
+    var distance_in_km = AppPreference("DISTANCE_IN_KM_KEY", 1)      // 1 in KM, 0 in NM
+    var altitude_in_ft = AppPreference("ALTITUDE_IN_FT_KEY", 1)      // 1 in Feet, 0 in Meter
 
     var preferences = arrayOf(
-        ip_1,
-        ip_2,
-        ip_3,
-        ip_4,
+        ipAddress,
         ip_port,
         lower_vertical_limit,
         upper_vertical_limit,
