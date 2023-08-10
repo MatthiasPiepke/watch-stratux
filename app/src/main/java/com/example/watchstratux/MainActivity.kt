@@ -55,7 +55,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         setContentView(binding.root)
 
         AppData.preferenceHandler = AppPreferenceHandler(this, "RadarPreferences")
-        AppData.preferenceHandler.loadPreferences(AppData.preferences)
+        AppData.preferenceHandler.loadPreferences(AppData.preferences.list)
 
         AppData.vibrator = getSystemService(android.app.Activity.VIBRATOR_SERVICE) as android.os.Vibrator
         AppData.displayWidth = (getSystemService(WINDOW_SERVICE) as WindowManager).currentWindowMetrics.bounds.width().toFloat()

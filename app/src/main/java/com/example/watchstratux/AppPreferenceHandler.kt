@@ -20,7 +20,7 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
             if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Init_KEY not found ...")
             if (savePreference(AppPreference("Init_KEY", 1))) {
                 Log.i("AppPreferenceHandler:", "Init_KEY created ...")
-                for (pref in DefaultPreferences.defaultPreferences) {
+                for (pref in AppData.defaultPreferences.list) {
                     savePreference(pref)
                 }
                 if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Default Preferences stored")

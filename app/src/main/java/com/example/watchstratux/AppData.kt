@@ -9,27 +9,32 @@ import android.os.PowerManager
 import android.os.Vibrator
 
 object AppData {
-    var ipAddress = AppPreference("IP_ADDRESS_KEY", BuildConfig.IP_ADDRESS)
-    var ipPort = AppPreference("IP_PORT_KEY", 2000)
+    object Preferences {
+        var ipAddress = AppPreference("IP_ADDRESS_KEY", BuildConfig.IP_ADDRESS)
+        var ipPort = AppPreference("IP_PORT_KEY", 2000)
 
-    var lowerVerticalLimit = AppPreference("LOWER_VERT_LIMIT_KEY", 0)
-    var upperVerticalLimit = AppPreference("UPPER_VERT_LIMIT_KEY", 0)
+        var lowerVerticalLimit = AppPreference("LOWER_VERT_LIMIT_KEY", 0)
+        var upperVerticalLimit = AppPreference("UPPER_VERT_LIMIT_KEY", 0)
 
-    var showTracks = AppPreference("SHOW_TRACKS_KEY", true)
-    var vibrationAlarm = AppPreference("ALARM_VIBRATION_KEY", true)
-    var distanceKm = AppPreference("DISTANCE_IN_KM_KEY", 1)      // 1 in KM, 0 in NM
-    var altitudeFt = AppPreference("ALTITUDE_IN_FT_KEY", 1)      // 1 in Feet, 0 in Meter
+        var showTracks = AppPreference("SHOW_TRACKS_KEY", true)
+        var vibrationAlarm = AppPreference("ALARM_VIBRATION_KEY", true)
+        var distanceKm = AppPreference("DISTANCE_IN_KM_KEY", 1)      // 1 in KM, 0 in NM
+        var altitudeFt = AppPreference("ALTITUDE_IN_FT_KEY", 1)      // 1 in Feet, 0 in Meter
 
-    var preferences = arrayOf(
-        ipAddress,
-        ipPort,
-        lowerVerticalLimit,
-        upperVerticalLimit,
-        showTracks,
-        vibrationAlarm,
-        distanceKm,
-        altitudeFt
-    )
+        var list = arrayOf(
+            ipAddress,
+            ipPort,
+            lowerVerticalLimit,
+            upperVerticalLimit,
+            showTracks,
+            vibrationAlarm,
+            distanceKm,
+            altitudeFt
+        )
+    }
+
+    var preferences = Preferences
+    var defaultPreferences = Preferences
 
     lateinit var preferenceHandler: AppPreferenceHandler
 

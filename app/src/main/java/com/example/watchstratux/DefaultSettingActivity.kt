@@ -28,7 +28,7 @@ class DefaultSettingActivity : Activity() {
             for (pref in DefaultPreferences.defaultPreferences) {
                 AppData.preferenceHandler.savePreference(pref)
             }
-            AppData.preferenceHandler.loadPreferences(AppData.preferences)
+            AppData.preferenceHandler.loadPreferences(AppData.preferences.list)
             AppData.stratuxTcpReceiver.stop()
             finish()
         }
