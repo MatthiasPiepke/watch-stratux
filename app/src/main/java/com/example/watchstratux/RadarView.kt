@@ -20,7 +20,7 @@ data class AircraftIcon(val body: Path, val track: Path, val textX: Int, val tex
 fun createAircraftIcon(distance: Int, relBearing: Float, relTrack: Int, groundSpeedMeSec: Int): AircraftIcon {
 
     // calculate x,y offsets
-    val distance_in_px = (distance.toFloat() * AppData.displayWidth / (2 * AppData.zoomLevelRange[AppData.preferences.distanceKm.value][AppData.zoomLevel]).toFloat()).toInt()
+    val distance_in_px = (distance.toFloat() * AppData.displayWidth / (2 * AppData.zoomLevelRange[AppData.preferences.distanceUnitKm.value][AppData.zoomLevel]).toFloat()).toInt()
     val x = (AppData.displayWidth / 2 + distance_in_px * Math.sin(relBearing / 180.0 * Math.PI)).toInt()
     val y = (AppData.displayHeight / 2 - distance_in_px * Math.cos(relBearing / 180.0 * Math.PI)).toInt()
     val ax = -12
@@ -46,7 +46,7 @@ fun createAircraftIcon(distance: Int, relBearing: Float, relTrack: Int, groundSp
     bodyPath.close()
 
     val groundSpeedMeMin = groundSpeedMeSec * 60
-    val groundSpeed_in_px = (groundSpeedMeMin * AppData.displayWidth / (2 * AppData.zoomLevelRange[AppData.preferences.distanceKm.value][AppData.zoomLevel])).toInt()
+    val groundSpeed_in_px = (groundSpeedMeMin * AppData.displayWidth / (2 * AppData.zoomLevelRange[AppData.preferences.distanceUnitKm.value][AppData.zoomLevel])).toInt()
     val u = (x - groundSpeed_in_px * Math.sin(relTrack / 180.0 * Math.PI)).toInt()
     val v = (y - groundSpeed_in_px * Math.cos(relTrack / 180.0 * Math.PI)).toInt()
     val trackPath = Path()
@@ -135,26 +135,26 @@ class RadarPaintView(context: Context) : View(context) {
         radarPaint.textSize = 18f
         radarPaint.textAlign = Paint.Align.RIGHT
         canvas.drawText(
-            AppData.radarInnerCircleZoomLevel[AppData.preferences.distanceKm.value][AppData.zoomLevel],
+            AppData.radarInnerCircleZoomLevel[AppData.preferences.distanceUnitKm.value][AppData.zoomLevel],
             (AppData.displayCenterWidth - radarInnerCircleRadius - 5),
             (AppData.displayCenterHeight + 7),
             radarPaint
         )
         canvas.drawText(
-            AppData.radarOuterCircleZoomLevel[AppData.preferences.distanceKm.value][AppData.zoomLevel],
+            AppData.radarOuterCircleZoomLevel[AppData.preferences.distanceUnitKm.value][AppData.zoomLevel],
             (AppData.displayCenterWidth - radarOuterCircleRadius - 5),
             (AppData.displayCenterHeight + 7),
             radarPaint
         )
         radarPaint.textAlign = Paint.Align.LEFT
         canvas.drawText(
-            AppData.radarInnerCircleZoomLevel[AppData.preferences.distanceKm.value][AppData.zoomLevel],
+            AppData.radarInnerCircleZoomLevel[AppData.preferences.distanceUnitKm.value][AppData.zoomLevel],
             (AppData.displayCenterWidth + radarInnerCircleRadius + 5),
             (AppData.displayCenterHeight + 7),
             radarPaint
         )
         canvas.drawText(
-            AppData.radarOuterCircleZoomLevel[AppData.preferences.distanceKm.value][AppData.zoomLevel],
+            AppData.radarOuterCircleZoomLevel[AppData.preferences.distanceUnitKm.value][AppData.zoomLevel],
             (AppData.displayCenterWidth + radarOuterCircleRadius + 5),
             (AppData.displayCenterHeight + 7),
             radarPaint
@@ -202,7 +202,7 @@ class RadarPaintView(context: Context) : View(context) {
             if( AppData.aircraftList.isEmpty() == false){
                 for(aircraft in AppData.aircraftList){
                     // draw only aircrafts within zoom range
-                    if( aircraft.distanceMe < AppData.zoomLevelRange[AppData.preferences.distanceKm.value][AppData.zoomLevel] ){
+                    if( aircraft.distanceMe < AppData.zoomLevelRange[AppData.preferences.distanceUnitKm.value][AppData.zoomLevel] ){
                         // draw only aircrafts within the given vertical view settings
                         var aircraftIsTooLow = false
                         var aircraftIsTooHigh = false
@@ -224,7 +224,7 @@ class RadarPaintView(context: Context) : View(context) {
                                 // prepare rel Vert Text
                                 if( aircraftIcon.textLeftAligned ) radarPaint.textAlign = Paint.Align.LEFT else radarPaint.textAlign = Paint.Align.RIGHT
                                 var relVertText = if (aircraft.relativeVerticalFt >= 0) "+" else "-"
-                                if( AppData.preferences.altitudeFt.value == 1 ) relVertText += (aircraft.relativeVerticalFt / 100)
+                                if( AppData.preferences.altitudeUnitFt.value == 1 ) relVertText += (aircraft.relativeVerticalFt / 100)
                                 else relVertText += "%.1f".format(aircraft.relativeVerticalFt/3.281f / 100f)
                                 if (aircraft.climbRateFtSec > 0) relVertText += "▲" else if (aircraft.climbRateFtSec < 0) relVertText += "▼"
 
@@ -259,7 +259,7 @@ class RadarPaintView(context: Context) : View(context) {
                                     radarPaint.color = Color.GRAY
                                 }
                                 radarPaint.style = Paint.Style.STROKE
-                                var distance_in_px = aircraft.distanceMe*AppData.displayWidth/(2*AppData.zoomLevelRange[AppData.preferences.distanceKm.value][AppData.zoomLevel])
+                                var distance_in_px = aircraft.distanceMe*AppData.displayWidth/(2*AppData.zoomLevelRange[AppData.preferences.distanceUnitKm.value][AppData.zoomLevel])
                                 canvas.drawArc(
                                     AppData.displayCenterWidth - distance_in_px,
                                     AppData.displayCenterHeight - distance_in_px,
@@ -274,7 +274,7 @@ class RadarPaintView(context: Context) : View(context) {
                                 radarPaint.style = Paint.Style.FILL
                                 radarPaint.textAlign = Paint.Align.LEFT
                                 var relVertText = if (aircraft.relativeVerticalFt >= 0) "+" else "-"
-                                if( AppData.preferences.altitudeFt.value == 1 ) relVertText += (aircraft.relativeVerticalFt / 100)
+                                if( AppData.preferences.altitudeUnitFt.value == 1 ) relVertText += (aircraft.relativeVerticalFt / 100)
                                 else relVertText += "%.1f".format(aircraft.relativeVerticalFt/3.281f / 100f)
                                 if (aircraft.climbRateFtSec > 0) relVertText += "▲" else if (aircraft.climbRateFtSec < 0) relVertText += "▼"
                                 canvas.drawText(relVertText, AppData.displayCenterWidth - radarPaint.measureText(relVertText) / 2, AppData.displayCenterHeight - distance_in_px - 3, radarPaint)
@@ -294,7 +294,7 @@ class RadarPaintView(context: Context) : View(context) {
             )
             // draw my track
             if( AppData.preferences.showTracks.value as Boolean == true ) {
-                val myGroundSpeed_in_px = (AppData.MyAircraft.groundSpeedMeSec * 60 * AppData.displayWidth / (2 * AppData.zoomLevelRange[AppData.preferences.distanceKm.value][AppData.zoomLevel])).toInt()
+                val myGroundSpeed_in_px = (AppData.MyAircraft.groundSpeedMeSec * 60 * AppData.displayWidth / (2 * AppData.zoomLevelRange[AppData.preferences.distanceUnitKm.value][AppData.zoomLevel])).toInt()
                 radarPaint.color = Color.WHITE
                 radarPaint.flags = 0
                 canvas.drawLine(AppData.displayCenterWidth, AppData.displayCenterHeight, AppData.displayCenterWidth, AppData.displayCenterHeight - myGroundSpeed_in_px, radarPaint)

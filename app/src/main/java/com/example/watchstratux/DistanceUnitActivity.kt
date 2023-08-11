@@ -23,7 +23,7 @@ class DistanceUnitActivity : Activity() {
         val radio_button_km = findViewById(R.id.distance_unit_radioButton_km) as RadioButton
         val radio_button_nm = findViewById(R.id.distance_unit_radioButton_nm) as RadioButton
 
-        if (AppData.preferences.distanceKm.value == 1) {
+        if (AppData.preferences.distanceUnitKm.value == 1) {
             radio_button_km.setChecked(true)
             radio_button_nm.setChecked(false)
         } else {
@@ -34,14 +34,14 @@ class DistanceUnitActivity : Activity() {
         radio_button_km.setOnClickListener {
             radio_button_km.setChecked(true)
             radio_button_nm.setChecked(false)
-            AppData.preferences.distanceKm.value = 1
-            AppData.preferenceHandler.savePreference(AppData.preferences.distanceKm)
+            AppData.preferences.distanceUnitKm.value = 1
+            AppData.preferenceHandler.savePreference(AppData.preferences.distanceUnitKm)
         }
         radio_button_nm.setOnClickListener {
             radio_button_km.setChecked(false)
             radio_button_nm.setChecked(true)
-            AppData.preferences.distanceKm.value = 0
-            AppData.preferenceHandler.savePreference(AppData.preferences.distanceKm)
+            AppData.preferences.distanceUnitKm.value = 0
+            AppData.preferenceHandler.savePreference(AppData.preferences.distanceUnitKm)
         }
     }
 }

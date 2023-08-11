@@ -95,7 +95,7 @@ class SettingsRecyclerViewAdapter(context: Context) : RecyclerView.Adapter<Setti
             holder.switch.visibility = View.GONE
             holder.textViewItem_up.textSize = 14f
             holder.textViewItem_up.setText("Distance Unit")
-            if(AppData.preferences.distanceKm.value == 1) holder.textViewItem_down.setText("Kilometer")
+            if(AppData.preferences.distanceUnitKm.value == 1) holder.textViewItem_down.setText("Kilometer")
             else holder.textViewItem_down.setText("Nautical Miles")
             holder.cardView.setOnClickListener {
                 context.startActivity(Intent(context, DistanceUnitActivity::class.java))
@@ -105,7 +105,7 @@ class SettingsRecyclerViewAdapter(context: Context) : RecyclerView.Adapter<Setti
             holder.switch.visibility = View.GONE
             holder.textViewItem_up.textSize = 14f
             holder.textViewItem_up.setText("Altitude Unit")
-            if(AppData.preferences.altitudeFt.value == 1) holder.textViewItem_down.setText("Feet")
+            if(AppData.preferences.altitudeUnitFt.value == 1) holder.textViewItem_down.setText("Feet")
             else holder.textViewItem_down.setText("Meter")
             holder.cardView.setOnClickListener {
                 context.startActivity(Intent(context, AltitudeUnitActivity::class.java))

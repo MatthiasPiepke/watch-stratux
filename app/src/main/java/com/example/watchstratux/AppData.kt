@@ -18,8 +18,8 @@ object AppData {
 
         var showTracks = AppPreference("SHOW_TRACKS_KEY", true)
         var vibrationAlarm = AppPreference("ALARM_VIBRATION_KEY", true)
-        var distanceKm = AppPreference("DISTANCE_IN_KM_KEY", 1)      // 1 in KM, 0 in NM
-        var altitudeFt = AppPreference("ALTITUDE_IN_FT_KEY", 1)      // 1 in Feet, 0 in Meter
+        var distanceUnitKm = AppPreference("DISTANCE_IN_KM_KEY", 1)      // 1 in KM, 0 in NM
+        var altitudeUnitFt = AppPreference("ALTITUDE_IN_FT_KEY", 1)      // 1 in Feet, 0 in Meter
 
         var list = arrayOf(
             ipAddress,
@@ -28,8 +28,8 @@ object AppData {
             upperVerticalLimit,
             showTracks,
             vibrationAlarm,
-            distanceKm,
-            altitudeFt
+            distanceUnitKm,
+            altitudeUnitFt
         )
     }
 

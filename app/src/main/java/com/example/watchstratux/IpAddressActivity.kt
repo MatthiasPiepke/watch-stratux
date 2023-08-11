@@ -142,17 +142,8 @@ class IpAddressActivity : Activity() {
             finish()
         }
         okayButton.setOnClickListener {
-            /*AppData.ip_1.value = ipString.substring(0..2).toInt()
-            AppData.ip_2.value = ipString.substring(4..6).toInt()
-            AppData.ip_3.value = ipString.substring(8..10).toInt()
-            AppData.ip_4.value = ipString.substring(12..14).toInt()*/
-
             AppData.preferences.ipAddress.value = ipString
             AppData.preferenceHandler.savePreference(AppData.preferences.ipAddress)
-            /*AppData.preferenceHandler.savePreference(AppData.ip_1)
-            AppData.preferenceHandler.savePreference(AppData.ip_2)
-            AppData.preferenceHandler.savePreference(AppData.ip_3)
-            AppData.preferenceHandler.savePreference(AppData.ip_4)*/
 
             startActivity(Intent(applicationContext, IpPortActivity::class.java))
             finish()
