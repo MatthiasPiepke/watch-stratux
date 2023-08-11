@@ -213,7 +213,7 @@ class RadarPaintView(context: Context) : View(context) {
                             if (aircraft.relativeVerticalFt > AppData.upperLimitValues[AppData.preferences.upperVerticalLimit.value].toInt()) aircraftIsTooHigh = true
                         }
                         if( (aircraftIsTooLow == false) && (aircraftIsTooHigh == false) ){
-                            // draw aircraft icon if position is known, if not known draw white circle
+                            // draw aircraft icon if position is known, if not known draw circle
                             if( aircraft.position == true ){
                                 var relTrack = (AppData.myAircraft.track - aircraft.track).toInt()
                                 if (relTrack < -180) relTrack += 360
@@ -228,7 +228,7 @@ class RadarPaintView(context: Context) : View(context) {
                                 else relVertText += "%.1f".format(aircraft.relativeVerticalFt/3.281f / 100f)
                                 if (aircraft.climbRateFtSec > 0) relVertText += "▲" else if (aircraft.climbRateFtSec < 0) relVertText += "▼"
 
-                                if( aircraft.ageSec <= 10 ){
+                                if( aircraft.ageSec <= 5 ){
                                     // draw draw body
                                     if (aircraft.alarmLevel == 0) radarPaint.color = Color.GREEN else radarPaint.color = Color.RED
                                     radarPaint.style = Paint.Style.FILL_AND_STROKE
@@ -246,7 +246,7 @@ class RadarPaintView(context: Context) : View(context) {
                                     radarPaint.style = Paint.Style.FILL
                                     canvas.drawPath(aircraftIcon.body, radarPaint)
                                     radarPaint.style = Paint.Style.STROKE
-                                    if( AppData.preferences.showTracks.value as Boolean== true ) canvas.drawPath(aircraftIcon.track, radarPaint)
+                                    if( AppData.preferences.showTracks.value as Boolean == true ) canvas.drawPath(aircraftIcon.track, radarPaint)
                                     // draw relVert text
                                     radarPaint.style = Paint.Style.FILL
                                     canvas.drawText(relVertText, aircraftIcon.textX.toFloat(), (aircraftIcon.textY + 18).toFloat(), radarPaint)

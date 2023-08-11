@@ -169,8 +169,10 @@ class StratuxTcpReceiver {
                 val nextAircraft = aircraft.next()
                 if (nextAircraft.id == "" && nextAircraft.ageSec >= 2) {
                     aircraft.remove()
+                    Log.d(TAG, "aircraft removed, no ID")
                 } else if (nextAircraft.ageSec >= AppData.aircraftMaxAge) {
                     aircraft.remove()
+                    Log.d(TAG, "aircraft removed, ID: "+nextAircraft.id)
                 }
                 // increase age of each aircraft
                 nextAircraft.ageSec++

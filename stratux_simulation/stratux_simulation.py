@@ -73,20 +73,21 @@ async def websocket():
   async with websockets.serve(echo, socket.gethostname(), 80):
     await asyncio.Future()
 
-nmeaMessage = ["$GPRMC,145634.60,A,4923.90465,N,00907.39883,E,0.3,0.0,220722,,,D*5D",\
+nmeaMessage = ["$GPRMC,145634.60,A,4923.90465,N,00907.39883,E,120,40.0,220722,,,D*5D",\
 "$GPGGA,145634.60,4923.90465,N,00907.39883,E,2,12,1.00,336.0,M,47.7,M,,*5D",\
 "$PGRMZ,1103,f,3*28",\
 "$GPGSA,A,3,,,,,,,,,,,,,1.0,1.0,1.0*33",\
+"$PFLAA,0,4105,-5735,1000,1,74073A!DMMHG,0,0,60,10.4,9*49",\
 "$PFLAA,0,40260,20167,10636,1,4400E3!EJU18TQ,11,0,231,-0.3,9*7F",\
 "$PFLAA,0,-15028,24252,3328,1,3C56EB!GWI6K,215,0,150,0.0,9*09",\
 "$PFLAA,0,49736,16153,2647,1,3C66AD!DLH2PM,4,0,191,-7.8,9*4C",\
 "$PFLAA,0,28540,21395,11253,1,4400E9!EJU79ZQ,6,0,227,-0.3,9*4E",\
 "$PFLAA,0,41057,-5735,3336,1,74073A!RJA126,136,0,181,10.4,9*49",\
 "$PFLAA,0,32613,18802,6978,1,3C6593,304,0,230,0.0,0*20",\
-"$PFLAA,0,-2000,-1000,300,1,74073A!DMGHH,60,0,60,10.4,9*49",\
 "$PFLAA,3,300,200,100,1,74073A!DMRUI,247,0,60,10.4,9*49",\
 "$PFLAA,0,3500,,290,1,74073A!DMZUR,247,0,60,10.4,9*49",\
 "$PFLAU,18,1,2,1,0,2,0,,,*75",\
+"$PFLAA,0,-2000,-1000,300,1,74073A!DMGHH,60,0,60,10.4,9*49",\
 "$RPYL,12,-8,0,14,0,1036,0"]
 
 async def tcpsocket():
@@ -102,12 +103,27 @@ async def tcpsocket():
     
     try:
       print('connection from ', client_address, file = sys.stderr)
-        
+
+      index = 0
+
       while True:   
         try:
+          nmeaMessage[4] = "$PFLAA,0,4105,-5735,1000,1,74073A!DMMHG,"+str(index)+",0,60,10.4,9*49"
+
+          if index == 40: del nmeaMessage[14]
+          if index == 90: nmeaMessage[13] = "$PFLAU,18,1,2,1,1,,0,,,*75"
+          if index == 180: nmeaMessage[13] = "$PFLAU,18,1,2,1,1,,0,,,*75"
+
           for textList in nmeaMessage:
             connection.sendall(bytes(textList, encoding='utf8')+bytes("\n", encoding='utf8'))
             #print(textList)
+
+          nmeaMessage[13] = "$PFLAU,18,1,2,1,0,,0,,,*75"
+
+          index += 10
+          if index == 360:
+            index = 0
+            nmeaMessage.insert(14, "$PFLAA,0,-2000,-1000,300,1,74073A!DMGHH,60,0,60,10.4,9*49")
           await asyncio.sleep(1)
                 
         except socket.error:

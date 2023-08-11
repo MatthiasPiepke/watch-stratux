@@ -86,7 +86,7 @@ object AppData {
     val alarmExitPattern = longArrayOf(600)
     val alarmExitTiming = intArrayOf(128)
 
-    val aircraftMaxAge: Int = 2
+    val aircraftMaxAge: Int = 15
 
     val compassItemText = arrayOf("N","I","I","E","I","I","S","I","I","W","I","I")
     val zoomLevelRange = arrayOf(intArrayOf(44448, 29632, 14816, 11112, 5556, 3704, 1852), intArrayOf(45000, 30000, 15000, 9000, 6000, 3000, 1500))
