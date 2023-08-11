@@ -9,7 +9,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 
-class AppPreferenceHandler(context: Context, preferenceFile: String) {
+class AppPreferenceHandler(context: Context, preferenceFile: String, defaultPrefArray: Array<out AppPreference<out Any>>) {
     private var appPreferences: SharedPreferences
 
     init {
@@ -20,7 +20,7 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
             if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Init_KEY not found ...")
             if (savePreference(AppPreference("Init_KEY", 1))) {
                 Log.i("AppPreferenceHandler:", "Init_KEY created ...")
-                for (pref in AppData.defaultPreferences.list) {
+                for (pref in defaultPrefArray) {
                     savePreference(pref)
                 }
                 if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", "Default Preferences stored")

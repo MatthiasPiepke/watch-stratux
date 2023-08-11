@@ -54,7 +54,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        AppData.preferenceHandler = AppPreferenceHandler(this, "RadarPreferences")
+        AppData.preferenceHandler = AppPreferenceHandler(this, "RadarPreferences", AppData.defaultPreferences.list)
         AppData.preferenceHandler.loadPreferences(AppData.preferences.list)
 
         AppData.vibrator = getSystemService(android.app.Activity.VIBRATOR_SERVICE) as android.os.Vibrator
