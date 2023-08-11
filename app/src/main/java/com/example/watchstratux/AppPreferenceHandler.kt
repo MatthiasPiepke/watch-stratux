@@ -102,7 +102,7 @@ class AppPreferenceHandler(context: Context, preferenceFile: String) {
         return !saveIssue
     }
 /*
-    fun clearPreference(pref: AppPreference): Boolean {
+    fun <T>clearPreference(pref: AppPreference<T>): Boolean {
         var clearIssue = false
         if (appPreferences.edit().remove(pref.key).commit() == true) {
             if(BuildConfig.DEBUG) Log.i("AppPreferenceHandler:", pref.key + " cleared " + pref.value)
