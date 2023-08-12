@@ -5,7 +5,6 @@
 
 package com.example.watchstratux
 
-import android.os.PowerManager
 import android.os.VibrationEffect
 import android.util.Log
 import java.io.BufferedReader
@@ -69,7 +68,7 @@ object StratuxData {
 class StratuxTcpReceiver {
     var isReceiverRunning = false
     var isReceiverLooping = false
-    var alarmCounter = 0
+    var alarmIsSet = false
 
     private val readlineTimeout: Timeout = Timeout(3000, "TCP Receiver -readline-")
     private val stopTimeout: Timeout = Timeout(3000, "TCP Receiver -stop-")
@@ -89,7 +88,7 @@ class StratuxTcpReceiver {
 
         if(isReceiverRunning == false) {
             try {
-                socket.connect(InetSocketAddress(""+AppData.ip_1.value+"."+AppData.ip_2.value+"."+AppData.ip_3.value+"."+AppData.ip_4.value, Integer.parseInt(""+AppData.ip_port.value)), 100)
+                socket.connect(InetSocketAddress(AppData.preferences.ipAddress.value, AppData.preferences.ipPort.value), 100)
             } catch (e: Exception) {
                 if(BuildConfig.DEBUG) Log.e(TAG, "Error 2: Could not open the socket! $e")
             }
@@ -100,7 +99,8 @@ class StratuxTcpReceiver {
                 readlineTimeout.start()
                 isReceiverRunning = true
                 isReceiverLooping = true
-                AppData.connectionStatus = AppData.ConnectionStatus.STRATUX
+                AppData.connectionStatus = AppData.ConnectionStatus.NO_GPS
+                AppData.connectionAlarmIsSet = false
                 while (isReceiverLooping) {
                     if (socket.isConnected) {
                         var readline: String? = null
@@ -176,22 +176,20 @@ class StratuxTcpReceiver {
                 nextAircraft.ageSec++
             }
 
-            // check for alarms
-            if( AppData.vibration_alarm.value == 1 ) {
-                if( StratuxData.PFLAU.alarmLevel != 0 ) {
-                    if(alarmCounter == 0 ){
-                        var wakeLock = AppData.powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP or PowerManager.ON_AFTER_RELEASE, "appname::WakeLock")
-                        wakeLock.acquire()
-                        while( AppData.isAppAcitve == false )  // wait until main activity wake call onResume, vib is not working before
-                        AppData.vibrator.vibrate(VibrationEffect.createOneShot(500, 255))
-                        wakeLock.release()
-                        alarmCounter = AppData.alarmRepetition
+            // check for collision alarm, if ground speed > 54 kmh to avoid alarms during ground handling
+            if( AppData.myAircraft.groundSpeedMeSec > 15) {
+                if( AppData.preferences.vibrationAlarm.value == true ) {
+                    if( StratuxData.PFLAU.alarmLevel != 0 ) {
+                        if(alarmIsSet == false ){
+                            AppData.vibrator.vibrate(VibrationEffect.createWaveform(AppData.alarmTrafficPattern, AppData.alarmTrafficTiming, -1))
+                            alarmIsSet = true
+                        }
+                    } else {
+                        alarmIsSet = false
                     }
-                    alarmCounter -= 1
-                } else {
-                    alarmCounter = 0
                 }
             }
+
         }
 
         if( splitMsg[0].equals("${'$'}PFLAA") == true ) {
@@ -214,7 +212,7 @@ class StratuxTcpReceiver {
             var relBear = 0.0f
 
             // check if GPS fix has 3D
-            if( AppData.gpsFix == true ) {
+            if( AppData.connectionStatus == AppData.ConnectionStatus.STRATUX_OK ) {
                 // analyse PFLAA and update AppData AircraftList
 
                 // calculate distance
@@ -302,27 +300,19 @@ class StratuxTcpReceiver {
             //StratuxData.GPRMC.longitudeDirection = splitMsg[6]
             StratuxData.GPRMC.groundSpeedKn = splitMsg[7].toFloat()
             StratuxData.GPRMC.track = splitMsg[8].toFloat()
-
-            // check if GPS fix has 3D
-            if( AppData.gpsFix == true ){
-                AppData.myAircraft.groundSpeedMeSec = StratuxData.GPRMC.groundSpeedKn*0.514444f
-                AppData.myAircraft.track = StratuxData.GPRMC.track.toInt()
-            }
+            AppData.myAircraft.groundSpeedMeSec = StratuxData.GPRMC.groundSpeedKn*0.514444f
+            AppData.myAircraft.track = StratuxData.GPRMC.track.toInt()
         }
 
         if( splitMsg[0].equals("${'$'}GPGGA") == true ) {
             StratuxData.GPGGA.altitudeMe = splitMsg[9].toFloat()
-
-            // check if GPS fix has 3D
-            if( AppData.gpsFix == true ) {
-                AppData.myAircraft.altitudeFt = StratuxData.GPGGA.altitudeMe * 3.281f
-            }
+            AppData.myAircraft.altitudeFt = StratuxData.GPGGA.altitudeMe * 3.281f
         }
 
         if( splitMsg[0].equals("${'$'}GPGSA") == true ) {
             StratuxData.GPGSA.fix = splitMsg[2].toInt()
-            if( StratuxData.GPGSA.fix == 3 ) AppData.gpsFix = true
-            else AppData.gpsFix = false
+            if( StratuxData.GPGSA.fix == 3 ) AppData.connectionStatus = AppData.ConnectionStatus.STRATUX_OK
+            else AppData.connectionStatus = AppData.ConnectionStatus.NO_GPS
         }
     }
 }

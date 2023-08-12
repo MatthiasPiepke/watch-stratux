@@ -25,10 +25,10 @@ class DefaultSettingActivity : Activity() {
 
         okayButton.setOnClickListener {
             AppData.preferenceHandler.clearAllPrefences()
-            for (pref in DefaultPreferences.defaultPreferences) {
+            for (pref in AppData.defaultPreferences.list) {
                 AppData.preferenceHandler.savePreference(pref)
             }
-            AppData.preferenceHandler.loadPreferences(AppData.preferences)
+            AppData.preferenceHandler.loadPreferences(AppData.preferences.list)
             AppData.stratuxTcpReceiver.stop()
             finish()
         }

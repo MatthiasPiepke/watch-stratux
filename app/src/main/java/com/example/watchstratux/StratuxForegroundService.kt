@@ -14,6 +14,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.wifi.WifiManager
 import android.os.IBinder
+import android.os.VibrationEffect
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import kotlinx.coroutines.CoroutineScope
@@ -61,6 +62,10 @@ class StratuxForegroundService : Service() {
                     if(BuildConfig.DEBUG) Log.i(TAG, "Stratux TCP Receiver starting...")
                     AppData.stratuxTcpReceiver.start()
                     if(BuildConfig.DEBUG) Log.i(TAG, "Stratux TCP Receiver stopped!")
+                    if( AppData.connectionAlarmIsSet == false ) {
+                        if( AppData.preferences.vibrationAlarm.value == true ) AppData.vibrator.vibrate(VibrationEffect.createWaveform(AppData.alarmConnectionPattern, AppData.alarmConnectionTiming, -1))
+                        AppData.connectionAlarmIsSet = true    // will be set back to false in StratuxTcpReceiver when connection is successful
+                    }
                 } else {
                     AppData.connectionStatus = AppData.ConnectionStatus.NO_WIFI
                     if(BuildConfig.DEBUG) Log.i(TAG, "TCP Service - Wifi disabled")
@@ -81,10 +86,11 @@ class StratuxForegroundService : Service() {
                         if(BuildConfig.DEBUG) Log.i(TAG, "WS Service - Wifi enabled")
                         if(BuildConfig.DEBUG) Log.i(TAG, "Stratux WS Receiver is starting")
                         AppData.stratuxWsReceiver.start()
-                        if(AppData.stratuxWsReceiver.isStratuxWsReceiverConnected())
+                        if(AppData.stratuxWsReceiver.isStratuxWsReceiverConnected() == true) {
                             if(BuildConfig.DEBUG) Log.i(TAG, "Stratux WS Receiver started successfully")
-                        else
-                                if(BuildConfig.DEBUG) Log.e(TAG, "Stratux WS Receiver Start failed")
+                        } else {
+                            if(BuildConfig.DEBUG) Log.e(TAG, "Stratux WS Receiver Start failed")
+                        }
                     } else {
                         if(BuildConfig.DEBUG) Log.i(TAG, "WS Service - Wifi disabled")
                     }
