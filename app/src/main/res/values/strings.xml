@@ -1,3 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
     <string name="app_name">WatchStratux</string>
+    <string name="version">Version 0.4.9</string>
+    <string name="owner">written by Matthias Piepke</string>
+    <string name="github_link"><u>https://github.com/MatthiasPiepke/watch-stratux</u></string>
+    <string name="license">This app is licensed under BSD-3-Clause.</string>
+    <string name="privacy">This app is 100% free, 100% open source and does not collect any data."</string>
+    <string name="disclaimer">Never trust and rely on any electronic system in your airplane.\nIt can always fail at any time.
+        This app does not replace your\n responsibility to watch the sky for traffic with your own eyes!!\n
+        We do not recommend to use it during flight. We do not\n guarantee that traffic information will be displayed\n correctly.</string>
 </resources>
