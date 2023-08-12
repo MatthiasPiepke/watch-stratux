@@ -5,65 +5,71 @@ import socket
 import sys
 import datetime
 
-websocketMessage = '{"Version":"v1.6r1-eu027",\
-"Build":"3d07b461d7a9565cea07727c44760d3b55bb0039",\
-"HardwareBuild":"",\
-"Devices":2,\
-"Connected_Users":6,\
-"DiskBytesFree":29747884032,\
-"UAT_messages_last_minute":0,\
-"UAT_messages_max":0,\
-"ES_messages_last_minute":1286,\
-"ES_messages_max":2026,\
-"OGN_messages_last_minute":0,\
-"OGN_messages_max":0,\
-"OGN_connected":true,\
-"AIS_messages_last_minute":0,\
-"AIS_messages_max":0,\
-"AIS_connected":false,\
-"UAT_traffic_targets_tracking":0,\
-"ES_traffic_targets_tracking":9,\
-"Ping_connected":false,\
-"UATRadio_connected":false,\
-"GPS_satellites_locked":8,\
-"GPS_satellites_seen":11,\
-"GPS_satellites_tracked":11,\
-"GPS_position_accuracy":5.4,\
-"GPS_connected":true,\
-"GPS_solution":"3D GPS",\
-"GPS_detected_type":23,\
-"GPS_NetworkRemoteIp":"",\
-"Uptime":699970,\
-"UptimeClock":"0001-01-01T00:11:39.97Z",\
-"CPUTemp":50.634,\
-"CPUTempMin":34.076,\
-"CPUTempMax":50.634,\
-"NetworkDataMessagesSent":15429,\
-"NetworkDataBytesSent":589491,\
-"NetworkDataMessagesSentLastSec":8,\
-"NetworkDataBytesSentLastSec":264,\
-"UAT_METAR_total":0,\
-"UAT_TAF_total":0,\
-"UAT_NEXRAD_total":0,\
-"UAT_SIGMET_total":0,\
-"UAT_PIREP_total":0,\
-"UAT_NOTAM_total":0,\
-"UAT_OTHER_total":0,\
-"Errors":[],\
-"Logfile_Size":30683,\
-"AHRS_LogFiles_Size":0,\
-"BMPConnected":true,\
-"IMUConnected":true,\
-"NightMode":false,\
-"OGN_noise_db":11.7,\
-"OGN_gain_db":37.2,\
-"OGN_tx_enabled":false}'
+timeStart = time.time()
 
 async def echo(websocket):
+
+  websocketMessage = '{"Version":"v1.6r1-eu027",\
+  "Build":"3d07b461d7a9565cea07727c44760d3b55bb0039",\
+  "HardwareBuild":"",\
+  "Devices":2,\
+  "Connected_Users":6,\
+  "DiskBytesFree":29747884032,\
+  "UAT_messages_last_minute":0,\
+  "UAT_messages_max":0,\
+  "ES_messages_last_minute":1286,\
+  "ES_messages_max":2026,\
+  "OGN_messages_last_minute":0,\
+  "OGN_messages_max":0,\
+  "OGN_connected":true,\
+  "AIS_messages_last_minute":0,\
+  "AIS_messages_max":0,\
+  "AIS_connected":false,\
+  "UAT_traffic_targets_tracking":0,\
+  "ES_traffic_targets_tracking":9,\
+  "Ping_connected":false,\
+  "UATRadio_connected":false,\
+  "GPS_satellites_locked":8,\
+  "GPS_satellites_seen":11,\
+  "GPS_satellites_tracked":11,\
+  "GPS_position_accuracy":5.4,\
+  "GPS_connected":true,\
+  "GPS_solution":"3D GPS",\
+  "GPS_detected_type":23,\
+  "GPS_NetworkRemoteIp":"",\
+  "Uptime":699970,\
+  "UptimeClock":"0001-01-01T00:11:39.97Z",\
+  "CPUTemp":50.634,\
+  "CPUTempMin":34.076,\
+  "CPUTempMax":50.634,\
+  "NetworkDataMessagesSent":15429,\
+  "NetworkDataBytesSent":589491,\
+  "NetworkDataMessagesSentLastSec":8,\
+  "NetworkDataBytesSentLastSec":264,\
+  "UAT_METAR_total":0,\
+  "UAT_TAF_total":0,\
+  "UAT_NEXRAD_total":0,\
+  "UAT_SIGMET_total":0,\
+  "UAT_PIREP_total":0,\
+  "UAT_NOTAM_total":0,\
+  "UAT_OTHER_total":0,\
+  "Errors":[],\
+  "Logfile_Size":30683,\
+  "AHRS_LogFiles_Size":0,\
+  "BMPConnected":true,\
+  "IMUConnected":true,\
+  "NightMode":false,\
+  "OGN_noise_db":11.7,\
+  "OGN_gain_db":37.2,\
+  "OGN_tx_enabled":false}'
+
   while True:
     try:
+      timeNow = time.time() - timeStart
+      utcString = time.strftime("%H:%M:%S", time.gmtime(timeNow))
+      utcindex = websocketMessage.find("UptimeClock")
+      websocketMessage = websocketMessage[:(utcindex+25)] + utcString + websocketMessage[(utcindex+33):]
       await websocket.send(websocketMessage)
-      #await print(websocketMessage)
       await asyncio.sleep(1)
     except Exception:
       break

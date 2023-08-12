@@ -51,27 +51,31 @@ class StratuxWsReceiver() {
         }
 
         override fun onMessage(message: String?) {
-            val jsonconversion = JSONObject(message!!)
-            StratuxStatusData.version.value = jsonconversion.getString(StratuxStatusData.version.key)
-            StratuxStatusData.cpuTemp.value = jsonconversion.getDouble(StratuxStatusData.cpuTemp.key)
-            StratuxStatusData.gpsConnected.value = jsonconversion.getBoolean(StratuxStatusData.gpsConnected.key)
-            StratuxStatusData.gpsSolution.value = jsonconversion.getString(StratuxStatusData.gpsSolution.key)
-            StratuxStatusData.gpsSatelliteTracked.value = jsonconversion.getInt(StratuxStatusData.gpsSatelliteTracked.key)
-            StratuxStatusData.gpsSatelliteSeen.value = jsonconversion.getInt(StratuxStatusData.gpsSatelliteSeen.key)
-            //StratuxStatusData.bmpConnected.value = jsonconversion.getBoolean(StratuxStatusData.bmpConnected.key)
-            //StratuxStatusData.imuConnected.value = jsonconversion.getBoolean(StratuxStatusData.imuConnected.key)
-            StratuxStatusData.ognConnected.value = jsonconversion.getBoolean(StratuxStatusData.ognConnected.key)
-            StratuxStatusData.ognNoise.value = jsonconversion.getDouble(StratuxStatusData.ognNoise.key)
-            StratuxStatusData.ognGain.value = jsonconversion.getDouble(StratuxStatusData.ognGain.key)
-            StratuxStatusData.esTrafficTracking.value = jsonconversion.getInt(StratuxStatusData.esTrafficTracking.key)
-            StratuxStatusData.esMessagesLastMinute.value = jsonconversion.getInt(StratuxStatusData.esMessagesLastMinute.key)
-            StratuxStatusData.esMessagesMax.value = jsonconversion.getInt(StratuxStatusData.esMessagesMax.key)
-            StratuxStatusData.ognMessagesLastMinute.value = jsonconversion.getInt(StratuxStatusData.ognMessagesLastMinute.key)
-            StratuxStatusData.ognMessagesMax.value = jsonconversion.getInt(StratuxStatusData.ognMessagesMax.key)
-            StratuxStatusData.sdrDevices.value = jsonconversion.getInt(StratuxStatusData.sdrDevices.key)
-            StratuxStatusData.upTimeClock.value = jsonconversion.getString(StratuxStatusData.upTimeClock.key)
-            if(BuildConfig.DEBUG) Log.i(TAG, "Message")
-            StratuxStatusData.newData = true
+            try {
+                val jsonconversion = JSONObject(message!!)
+                StratuxStatusData.version.value = jsonconversion.getString(StratuxStatusData.version.key)
+                StratuxStatusData.cpuTemp.value = jsonconversion.getDouble(StratuxStatusData.cpuTemp.key)
+                StratuxStatusData.gpsConnected.value = jsonconversion.getBoolean(StratuxStatusData.gpsConnected.key)
+                StratuxStatusData.gpsSolution.value = jsonconversion.getString(StratuxStatusData.gpsSolution.key)
+                StratuxStatusData.gpsSatelliteTracked.value = jsonconversion.getInt(StratuxStatusData.gpsSatelliteTracked.key)
+                StratuxStatusData.gpsSatelliteSeen.value = jsonconversion.getInt(StratuxStatusData.gpsSatelliteSeen.key)
+                //StratuxStatusData.bmpConnected.value = jsonconversion.getBoolean(StratuxStatusData.bmpConnected.key)
+                //StratuxStatusData.imuConnected.value = jsonconversion.getBoolean(StratuxStatusData.imuConnected.key)
+                StratuxStatusData.ognConnected.value = jsonconversion.getBoolean(StratuxStatusData.ognConnected.key)
+                StratuxStatusData.ognNoise.value = jsonconversion.getDouble(StratuxStatusData.ognNoise.key)
+                StratuxStatusData.ognGain.value = jsonconversion.getDouble(StratuxStatusData.ognGain.key)
+                StratuxStatusData.esTrafficTracking.value = jsonconversion.getInt(StratuxStatusData.esTrafficTracking.key)
+                StratuxStatusData.esMessagesLastMinute.value = jsonconversion.getInt(StratuxStatusData.esMessagesLastMinute.key)
+                StratuxStatusData.esMessagesMax.value = jsonconversion.getInt(StratuxStatusData.esMessagesMax.key)
+                StratuxStatusData.ognMessagesLastMinute.value = jsonconversion.getInt(StratuxStatusData.ognMessagesLastMinute.key)
+                StratuxStatusData.ognMessagesMax.value = jsonconversion.getInt(StratuxStatusData.ognMessagesMax.key)
+                StratuxStatusData.sdrDevices.value = jsonconversion.getInt(StratuxStatusData.sdrDevices.key)
+                StratuxStatusData.upTimeClock.value = jsonconversion.getString(StratuxStatusData.upTimeClock.key)
+                if(BuildConfig.DEBUG) Log.i(TAG, "Message")
+                StratuxStatusData.newData = true
+            } catch (e: Exception) {
+                Log.e(TAG, "Error 6: $e")
+            }
         }
 
         override fun onClose(code: Int, reason: String?, remote: Boolean) {
