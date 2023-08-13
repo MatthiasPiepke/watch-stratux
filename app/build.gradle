@@ -26,7 +26,7 @@ android {
             minSdk 30
             targetSdk 32
             versionCode versionProps['VERSION_BUILD'].toInteger()
-            versionName "0.4.8"
+            versionName "0.4.9"
         }
     }
     else {
