@@ -10,6 +10,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Html
+import android.util.Range
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -47,7 +48,11 @@ class IpAddressActivity : Activity() {
         val button_9 = findViewById<View>(R.id.ipSettingButton9) as Button
 
         var ipAddressPosition = 0
-        var ipString = AppData.preferences.ipAddress.value
+
+        // convert ip string from 192.168.0.1 to 192.168.000.001
+        var ipParts = AppData.preferences.ipAddress.value.split('.').toMutableList()
+        for( i in ipParts.indices) ipParts[i] = ipParts[i].padStart(3, '0')
+        var ipString = ipParts.toList().joinToString(separator = ".")
         var ipText = ""
 
         fun updateIpTextView(){
@@ -142,6 +147,12 @@ class IpAddressActivity : Activity() {
             finish()
         }
         okayButton.setOnClickListener {
+
+            // convert ip string from 192.168.000.001 back to 192.168.0.1
+            ipParts = ipString.split('.').toMutableList()
+            for( i in ipParts.indices) ipParts[i] = ipParts[i].toInt().toString()
+            ipString = ipParts.toList().joinToString(separator = ".")
+
             AppData.preferences.ipAddress.value = ipString
             AppData.preferenceHandler.savePreference(AppData.preferences.ipAddress)
 
