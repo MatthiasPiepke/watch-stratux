@@ -7,12 +7,31 @@ android {
     namespace 'com.example.watchstratux'
     compileSdk 32
 
-    defaultConfig {
-        applicationId "com.example.watchstratux"
-        minSdk 30
-        targetSdk 32
-        versionCode 1
-        versionName "0.4.8"
+    def versionPropsFile = file('version.properties')
+
+    Properties versionProps = new Properties()
+
+    if (!versionPropsFile.exists()) {
+        versionProps['VERSION_BUILD'] = "0"
+        versionProps.store(versionPropsFile.newWriter(), null)
+    }
+
+    if (versionPropsFile.canRead()) {
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+        versionProps['VERSION_BUILD'] = (versionProps['VERSION_BUILD'].toInteger() + 1).toString()
+        versionProps.store(versionPropsFile.newWriter(), null)
+
+        defaultConfig {
+            applicationId "com.example.watchstratux"
+            minSdk 30
+            targetSdk 32
+            versionCode 1
+            versionName "0.4.8"
+        }
+    }
+    else {
+        throw new GradleException("Could not read version.properties!")
     }
 
     buildTypes {

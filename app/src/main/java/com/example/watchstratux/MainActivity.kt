@@ -111,7 +111,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 
     override fun onStart() {
         super.onStart()
-        Log.i(TAG,"Started")
+        Log.i(TAG, "Started with Version Name: "+BuildConfig.VERSION_NAME+" Build Number: "+BuildConfig.VERSION_CODE)
         if(BuildConfig.DEBUG) Log.i(TAG, "in debug mode")
         else Log.i(TAG, "in release mode")
     }
