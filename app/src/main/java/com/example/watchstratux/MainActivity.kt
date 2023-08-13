@@ -54,7 +54,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        AppData.preferenceHandler = AppPreferenceHandler(this, "RadarPreferences", AppData.defaultPreferences.list)
+        AppData.preferenceHandler = AppPreferenceHandler(this, "RadarPreferences", BuildConfig.VERSION_CODE,AppData.defaultPreferences.list)
         AppData.preferenceHandler.loadPreferences(AppData.preferences.list)
 
         AppData.vibrator = getSystemService(android.app.Activity.VIBRATOR_SERVICE) as android.os.Vibrator
@@ -111,7 +111,6 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 
     override fun onStart() {
         super.onStart()
-        Log.i(TAG, BuildConfig.IP_ADDRESS)
         if (BuildConfig.DEBUG) Log.i(TAG, "Started with Version Name: "+BuildConfig.VERSION_NAME+" Build Number: "+BuildConfig.VERSION_CODE+" in debug mode")
         else Log.i(TAG, "Started with Version Name: "+BuildConfig.VERSION_NAME+" Build Number: "+BuildConfig.VERSION_CODE+" in release mode")
     }
