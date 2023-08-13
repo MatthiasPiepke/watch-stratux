@@ -173,7 +173,8 @@ class MainRecyclerViewAdapter(var context: Context) : RecyclerView.Adapter<Recyc
 
     inner class WearRecyclerViewHolder4(view: View) : ViewHolder(view) {
         init {
-
+            val versionText: TextView = view.findViewById(R.id.about_version_text_view)
+            versionText.text = "Version " + BuildConfig.VERSION_NAME + "  Build " + BuildConfig.VERSION_CODE
         }
     }
 

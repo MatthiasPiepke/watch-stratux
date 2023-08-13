@@ -44,12 +44,13 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/about_version_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/menu_font"
-            android:text="@string/version"
+            android:text="Version Build"
             android:textColor="@color/white"
-            android:textSize="10sp" />
+            android:textSize="9sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,13 +58,13 @@
             android:fontFamily="@font/menu_font"
             android:text="@string/owner"
             android:textColor="@color/white"
-            android:textSize="12sp" />
+            android:textSize="11sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/menu_font"
             android:text="@string/github_link"
             android:textColor="@color/white"
@@ -73,23 +74,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="3dp"
             android:fontFamily="@font/menu_font"
-            android:text="@string/license"
-            android:textColor="@color/white"
-            android:textSize="6sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp"
-            android:fontFamily="@font/menu_font"
-            android:text="@string/privacy"
+            android:text="@string/license_privacy"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="6sp" />
+
 
         <TextView
             android:layout_width="wrap_content"
